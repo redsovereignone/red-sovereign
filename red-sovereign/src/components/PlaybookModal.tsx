@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ArrowLeft, ArrowRight, Check, Sparkles, Mail, Download, ChevronRight, Shield, Award, Users, Clock, Globe, TrendingUp, Target, RotateCcw } from 'lucide-react'
+import { X, Check, ChevronRight, Shield, Users, Clock, RotateCcw } from 'lucide-react'
 import { analytics, hashEmail } from '@/lib/analytics'
 import ResultsPreview from './ResultsPreview'
-import PricingBlock from './PricingBlock'
+// import PricingBlock from './PricingBlock' // TODO: Use when pricing block is implemented
 import { getTestValue, trackConversion } from '@/lib/ab-tests'
 
 interface PlaybookModalProps {
@@ -24,13 +24,33 @@ interface WizardData {
   biggestChallenge?: string;
 }
 
+interface QuestionField {
+  id: string;
+  label: string;
+  placeholder: string;
+  required: boolean;
+  type?: string;
+}
+
+interface Question {
+  id: string;
+  type: 'text' | 'select';
+  title: string;
+  subtitle: string;
+  field?: keyof WizardData;
+  fields?: QuestionField[];
+  options?: string[];
+  icon: string;
+  valueAdd: string;
+}
+
 // Updated questions to capture essential business metrics
-const QUESTIONS = [
+const QUESTIONS: Question[] = [
   {
     id: 'companyInfo',
     type: 'text',
-    title: 'Let\'s start with your company',
-    subtitle: 'We\'ll analyze your website and current positioning',
+    title: 'Let&apos;s start with your company',
+    subtitle: 'We&apos;ll analyze your website and current positioning',
     fields: [
       { id: 'companyName', label: 'Company Name', placeholder: 'Red Sovereign', required: true },
       { id: 'websiteUrl', label: 'Website URL', placeholder: 'redsovereign.com', required: true, type: 'url' }
@@ -41,7 +61,7 @@ const QUESTIONS = [
   {
     id: 'revenue',
     type: 'select',
-    title: 'What\'s your trailing 12-month revenue?',
+    title: 'What&apos;s your trailing 12-month revenue?',
     subtitle: 'This helps us benchmark and size opportunities',
     field: 'ttmRevenue',
     options: ['<$1M', '$1-5M', '$5-10M', '$10-20M', '$20M+'],
@@ -51,8 +71,8 @@ const QUESTIONS = [
   {
     id: 'growth',
     type: 'select',
-    title: 'What\'s your current annual growth rate?',
-    subtitle: 'We\'ll identify what\'s holding you back',
+    title: 'What&apos;s your current annual growth rate?',
+    subtitle: 'We&apos;ll identify what&apos;s holding you back',
     field: 'currentGrowthRate',
     options: ['Declining', '0-20%', '20-50%', '50-100%', '100%+'],
     icon: '📊',
@@ -61,8 +81,8 @@ const QUESTIONS = [
   {
     id: 'target',
     type: 'select',
-    title: 'What\'s your target growth rate for next year?',
-    subtitle: 'We\'ll build a plan to get you there',
+    title: 'What&apos;s your target growth rate for next year?',
+    subtitle: 'We&apos;ll build a plan to get you there',
     field: 'targetGrowthRate',
     options: ['20-30%', '30-50%', '50-75%', '75-100%', '100%+'],
     icon: '🎯',
@@ -71,8 +91,8 @@ const QUESTIONS = [
   {
     id: 'challenge',
     type: 'select',
-    title: 'What\'s your biggest growth challenge?',
-    subtitle: 'We\'ll prioritize solving this first',
+    title: 'What&apos;s your biggest growth challenge?',
+    subtitle: 'We&apos;ll prioritize solving this first',
     field: 'biggestChallenge',
     options: ['Not enough leads', 'Poor conversion rates', 'Long sales cycles', 'No clear strategy', 'Limited resources'],
     icon: '🚧',
@@ -86,14 +106,15 @@ export default function PlaybookModal({ isOpen, onClose, onLeadCreated }: Playbo
   const [data, setData] = useState<WizardData>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
+  // TODO: Use emailSubmitted state for conditional UI or analytics
+  // const [emailSubmitted, setEmailSubmitted] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const startTimeRef = useRef<number>(Date.now());
 
   // Get A/B test variations
   const modalTitle = getTestValue<string>('modal_title_v1');
-  const emailCTA = getTestValue<string>('email_cta_v1');
+  // const emailCTA = getTestValue<string>('email_cta_v1'); // TODO: Use when email CTA A/B test is implemented
 
   // Load saved progress from sessionStorage
   useEffect(() => {
@@ -157,7 +178,7 @@ export default function PlaybookModal({ isOpen, onClose, onLeadCreated }: Playbo
       setData(prev => ({ ...prev, ...value }));
     } else if (question.field && typeof value === 'string') {
       // Handle single select inputs
-      setData(prev => ({ ...prev, [question.field]: value }));
+      setData(prev => ({ ...prev, [question.field as keyof WizardData]: value }));
     }
 
     // Auto-advance to next question
@@ -195,7 +216,7 @@ export default function PlaybookModal({ isOpen, onClose, onLeadCreated }: Playbo
         throw new Error(responseData.error || 'Failed to submit');
       }
 
-      setEmailSubmitted(true);
+      // setEmailSubmitted(true); // TODO: Track email submission state
       setCurrentStep(2); // Show preview/confirmation
       onLeadCreated?.();
       
@@ -229,7 +250,7 @@ export default function PlaybookModal({ isOpen, onClose, onLeadCreated }: Playbo
     setCurrentQuestion(0);
     setData({});
     setErrors({});
-    setEmailSubmitted(false);
+    // setEmailSubmitted(false); // TODO: Reset email submission state
     
     // Clear session storage
     sessionStorage.removeItem('playbookWizardData');
@@ -361,9 +382,9 @@ function QuestionStep({
   onAnswer, 
   onBack 
 }: { 
-  question: any; 
+  question: Question; 
   value: WizardData; 
-  onAnswer: (value: any) => void; 
+  onAnswer: (value: string | Record<string, string>) => void; 
   onBack?: () => void;
 }) {
   const [localValues, setLocalValues] = useState<Record<string, string>>({});
@@ -373,7 +394,7 @@ function QuestionStep({
     // Initialize local values from saved data
     if (question.type === 'text' && question.fields) {
       const initial: Record<string, string> = {};
-      question.fields.forEach((field: any) => {
+      question.fields.forEach((field: QuestionField) => {
         initial[field.id] = value[field.id as keyof WizardData] || '';
       });
       setLocalValues(initial);
@@ -385,7 +406,7 @@ function QuestionStep({
     
     // Validate required fields
     if (question.fields) {
-      question.fields.forEach((field: any) => {
+      question.fields.forEach((field: QuestionField) => {
         if (field.required && !localValues[field.id]) {
           newErrors[field.id] = `${field.label} is required`;
         }
@@ -436,7 +457,7 @@ function QuestionStep({
       {/* Question content */}
       {question.type === 'text' && question.fields ? (
         <div className="space-y-4">
-          {question.fields.map((field: any) => (
+          {question.fields.map((field: QuestionField) => (
             <div key={field.id}>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 {field.label} {field.required && <span className="text-red-400">*</span>}
@@ -481,7 +502,7 @@ function QuestionStep({
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-3">
-          {question.options.map((option: string) => (
+          {question.options?.map((option: string) => (
             <motion.button
               key={option}
               onClick={() => onAnswer(option)}
@@ -561,7 +582,7 @@ function EmailCaptureStep({
       {/* What they'll receive */}
       <div className="bg-gradient-to-r from-red-600/20 to-red-500/20 border border-red-500/30 rounded-xl p-6">
         <h3 className="text-xl font-bold text-white mb-4">
-          Here's What You'll Receive Within 24 Hours:
+          Here&apos;s What You&apos;ll Receive Within 24 Hours:
         </h3>
         <div className="space-y-3">
           <div className="flex items-start gap-3">
@@ -570,7 +591,7 @@ function EmailCaptureStep({
             </div>
             <div>
               <p className="text-white font-medium">Website Conversion Audit</p>
-              <p className="text-gray-400 text-sm">Detailed analysis of your site's conversion optimization opportunities</p>
+              <p className="text-gray-400 text-sm">Detailed analysis of your site&apos;s conversion optimization opportunities</p>
             </div>
           </div>
           <div className="flex items-start gap-3">

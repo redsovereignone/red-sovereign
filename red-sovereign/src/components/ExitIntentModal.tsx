@@ -188,7 +188,7 @@ export default function ExitIntentModal({ onOpenPlaybook }: ExitIntentModalProps
                     Get your free Playbook before you go?
                   </h2>
                   <p className="text-gray-400">
-                    See exactly how we'd grow your business in 90 days
+                    See exactly how we&apos;d grow your business in 90 days
                   </p>
                 </div>
 

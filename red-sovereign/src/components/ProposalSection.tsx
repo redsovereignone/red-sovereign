@@ -31,7 +31,7 @@ export default function ProposalSection({ onOpenPlaybook }: ProposalSectionProps
             Your 90-Day ROI Plan
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
-            Your first step is to see exactly how we'll drive predictable growth in your business mapped in a free 90-Day ROI Plan. From there, you'll get a custom proposal with the precise investment required to make it happen.
+            Your first step is to see exactly how we&apos;ll drive predictable growth in your business mapped in a free 90-Day ROI Plan. From there, you&apos;ll get a custom proposal with the precise investment required to make it happen.
           </p>
           
           <motion.button

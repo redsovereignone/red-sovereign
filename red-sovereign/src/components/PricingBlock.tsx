@@ -39,7 +39,7 @@ export default function PricingBlock() {
       <div className="grid md:grid-cols-2 gap-6">
         {/* What's included */}
         <div>
-          <h4 className="text-sm font-medium text-gray-400 mb-3">What's Included:</h4>
+          <h4 className="text-sm font-medium text-gray-400 mb-3">What&apos;s Included:</h4>
           <ul className="space-y-2">
             <li className="flex items-start gap-2">
               <Check className="w-4 h-4 text-green-400 mt-0.5" />

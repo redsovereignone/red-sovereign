@@ -3,7 +3,7 @@
 
 export interface AnalyticsEvent {
   event: string;
-  properties?: Record<string, any>;
+  properties?: Record<string, unknown>;
   timestamp?: number;
 }
 
@@ -59,7 +59,7 @@ export function getCommonProps(additionalProps?: Partial<CommonEventProps>): Com
 }
 
 // Track event
-export function trackEvent(eventName: string, properties?: Record<string, any>): void {
+export function trackEvent(eventName: string, properties?: Record<string, unknown>): void {
   const event: AnalyticsEvent = {
     event: eventName,
     properties: {
@@ -75,13 +75,16 @@ export function trackEvent(eventName: string, properties?: Record<string, any>):
   }
 
   // Send to GA4 if available
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', eventName, event.properties);
+  if (typeof window !== 'undefined') {
+    const windowWithGtag = window as Window & { gtag?: (command: string, eventName: string, properties?: Record<string, unknown>) => void };
+    if (windowWithGtag.gtag) {
+      windowWithGtag.gtag('event', eventName, event.properties);
+    }
   }
 
   // Send to Segment if available
-  if (typeof window !== 'undefined' && (window as any).analytics) {
-    (window as any).analytics.track(eventName, event.properties);
+  if (typeof window !== 'undefined' && window.analytics) {
+    window.analytics.track(eventName, event.properties);
   }
 
   // Store in sessionStorage for debugging
@@ -102,7 +105,7 @@ export function trackEvent(eventName: string, properties?: Record<string, any>):
 // Specific event tracking functions
 export const analytics = {
   // Generic tracking function
-  trackEvent: (eventName: string, properties?: Record<string, any>) => 
+  trackEvent: (eventName: string, properties?: Record<string, unknown>) => 
     trackEvent(eventName, properties),
   
   // Hero events
@@ -126,15 +129,15 @@ export const analytics = {
     trackEvent('wizard_restart'),
   wizardStepStarted: (step: number) => 
     trackEvent('wizard_step_started', { step }),
-  wizardStepCompleted: (step: number, data?: any) => 
+  wizardStepCompleted: (step: number, data?: Record<string, unknown>) => 
     trackEvent('wizard_step_completed', { step, ...data }),
   
   // Lead events
-  leadCreated: (emailHash: string, data?: any) => 
+  leadCreated: (emailHash: string, data?: Record<string, unknown>) => 
     trackEvent('lead_created', { email_hash: emailHash, ...data }),
   
   // View events
-  previewViewed: (data?: any) => 
+  previewViewed: (data?: Record<string, unknown>) => 
     trackEvent('preview_viewed', data),
   pricingViewed: () => 
     trackEvent('pricing_viewed'),
@@ -144,13 +147,13 @@ export const analytics = {
     trackEvent('call_booked'),
   
   // PDF events
-  pdfGenerated: (data?: any) =>
+  pdfGenerated: (data?: Record<string, unknown>) =>
     trackEvent('pdf_generated', data),
   pdfDownloaded: () =>
     trackEvent('pdf_downloaded'),
   
   // Conversion events
-  bookCallClicked: (data?: any) =>
+  bookCallClicked: (data?: Record<string, unknown>) =>
     trackEvent('book_call_clicked', data),
   
   // Exit intent events

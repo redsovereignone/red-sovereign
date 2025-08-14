@@ -5,7 +5,7 @@ export async function GET() {
   try {
     // Check if tables exist
     const tables = ['playbook_submissions', 'analytics_events', 'waitlist'];
-    const results: any = {};
+    const results: Record<string, { exists: boolean; count?: number; error?: string; success?: boolean; message?: string }> = {};
     
     for (const table of tables) {
       const { count, error } = await supabaseAdmin
@@ -51,6 +51,7 @@ export async function GET() {
       
       if (error) {
         results.testInsert = { 
+          exists: false,
           success: false, 
           error: error.message 
         };
@@ -62,6 +63,7 @@ export async function GET() {
           .eq('id', data.id);
         
         results.testInsert = { 
+          exists: true,
           success: true, 
           message: 'Test insert and cleanup successful' 
         };
@@ -74,11 +76,12 @@ export async function GET() {
       supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL
     });
     
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return NextResponse.json(
       { 
         success: false, 
-        error: error.message 
+        error: errorMessage 
       },
       { status: 500 }
     );

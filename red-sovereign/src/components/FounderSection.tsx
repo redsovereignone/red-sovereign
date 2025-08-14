@@ -37,7 +37,7 @@ export default function FounderSection() {
               
               <blockquote className="relative">
                 <p className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-8 pl-8">
-                  Every founder knows the weight of payroll. I've carried it while bootstrapping and I've felt the frustration of marketing options that drain cash without delivering growth. That's why we built Red Sovereign: a growth system proven under pressure, where marketing must produce more cash than it consumes. Period.
+                  Every founder knows the weight of payroll. I&apos;ve carried it while bootstrapping and I&apos;ve felt the frustration of marketing options that drain cash without delivering growth. That&apos;s why we built Red Sovereign: a growth system proven under pressure, where marketing must produce more cash than it consumes. Period.
                 </p>
                 
                 <footer className="pl-8">
@@ -82,7 +82,7 @@ export default function FounderSection() {
           
           <div className="space-y-8">
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Our methodology isn't theoretical. It was forged in the trenches building and scaling these B2B companies:
+              Our methodology isn&apos;t theoretical. It was forged in the trenches building and scaling these B2B companies:
             </p>
             
             {/* Company Logos */}

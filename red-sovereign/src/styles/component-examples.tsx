@@ -172,7 +172,7 @@ export const TestimonialCard = ({
       transition-opacity duration-700
     " />
     
-    <p className="text-gray-300 text-lg mb-6 relative z-10">"{quote}"</p>
+    <p className="text-gray-300 text-lg mb-6 relative z-10">&quot;{quote}&quot;</p>
     <div className="relative z-10">
       <p className="text-white font-semibold">{author}</p>
       <p className="text-gray-500 text-sm">{role}</p>

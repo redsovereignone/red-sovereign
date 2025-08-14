@@ -230,7 +230,8 @@ View in Supabase: https://supabase.com/dashboard/project/lxjlatocuabjjaxkdsjq/ed
       if (fromEmailData) {
         fromEmail = fromEmailData;
       }
-    } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_e) {
       // Use environment variable as fallback
       fromEmail = process.env.RESEND_FROM_EMAIL || 'report@marketing.sovereignai.co';
     }
@@ -250,10 +251,13 @@ View in Supabase: https://supabase.com/dashboard/project/lxjlatocuabjjaxkdsjq/ed
     
     console.log('Email sent successfully with ID:', response.data?.id);
     return { success: true, emailId: response.data?.id };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Failed to send lead alert email:', error);
-    console.error('Error details:', error?.message || 'Unknown error');
-    console.error('Error response:', error?.response?.data || 'No response data');
-    return { success: false, error };
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Error details:', errorMessage);
+    if (error && typeof error === 'object' && 'response' in error) {
+      console.error('Error response:', (error as { response?: { data?: unknown } }).response?.data || 'No response data');
+    }
+    return { success: false, error: errorMessage };
   }
 }

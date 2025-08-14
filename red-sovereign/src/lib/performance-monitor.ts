@@ -110,8 +110,8 @@ class PerformanceMonitor {
     // Largest Contentful Paint (LCP)
     const lcpObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      const lastEntry = entries[entries.length - 1] as any;
-      const lcp = lastEntry.renderTime || lastEntry.loadTime;
+      const lastEntry = entries[entries.length - 1] as PerformanceEntry & { renderTime?: number; loadTime?: number };
+      const lcp = lastEntry.renderTime || lastEntry.loadTime || 0;
       
       if (lcp > 2500) {
         console.warn(`⚠️ LCP Warning: ${lcp.toFixed(0)}ms (target: <2500ms)`);
@@ -120,15 +120,16 @@ class PerformanceMonitor {
     
     try {
       lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
-    } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_e) {
       // LCP not supported
     }
 
     // First Input Delay (FID)
     const fidObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry: any) => {
-        const fid = entry.processingStart - entry.startTime;
+      entries.forEach((entry: PerformanceEntry & { processingStart?: number; startTime: number }) => {
+        const fid = (entry.processingStart || entry.startTime) - entry.startTime;
         if (fid > 100) {
           console.warn(`⚠️ FID Warning: ${fid.toFixed(0)}ms (target: <100ms)`);
         }
@@ -137,7 +138,8 @@ class PerformanceMonitor {
     
     try {
       fidObserver.observe({ type: 'first-input', buffered: true });
-    } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_e) {
       // FID not supported
     }
 
@@ -145,8 +147,9 @@ class PerformanceMonitor {
     let clsValue = 0;
     const clsObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        if (!(entry as any).hadRecentInput) {
-          clsValue += (entry as any).value;
+        const layoutShiftEntry = entry as PerformanceEntry & { hadRecentInput?: boolean; value?: number };
+        if (!layoutShiftEntry.hadRecentInput) {
+          clsValue += layoutShiftEntry.value || 0;
           if (clsValue > 0.1) {
             console.warn(`⚠️ CLS Warning: ${clsValue.toFixed(3)} (target: <0.1)`);
           }
@@ -156,7 +159,8 @@ class PerformanceMonitor {
     
     try {
       clsObserver.observe({ type: 'layout-shift', buffered: true });
-    } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_e) {
       // CLS not supported
     }
   }
@@ -212,11 +216,11 @@ class PerformanceMonitor {
    * Get device performance tier
    */
   getDevicePerformanceTier(): 'high' | 'medium' | 'low' {
-    const memory = (navigator as any).deviceMemory;
+    const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
     const cores = navigator.hardwareConcurrency;
     
-    if (memory >= 8 && cores >= 4) return 'high';
-    if (memory >= 4 && cores >= 2) return 'medium';
+    if (memory && memory >= 8 && cores >= 4) return 'high';
+    if (memory && memory >= 4 && cores >= 2) return 'medium';
     return 'low';
   }
 

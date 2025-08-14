@@ -7,7 +7,7 @@ interface ABTest {
   id: string;
   name: string;
   active: boolean;
-  variants: Record<TestVariant, any>;
+  variants: Record<TestVariant, unknown>;
   weights?: Record<TestVariant, number>; // For weighted distribution
 }
 
@@ -174,22 +174,24 @@ function assignVariant(test: ABTest): TestVariant {
 }
 
 // Helper to get test value
-export function getTestValue<T = any>(testId: string, path?: string): T {
+export function getTestValue<T = unknown>(testId: string, path?: string): T {
   const test = Object.values(CTA_TESTS).find(t => t.id === testId);
   if (!test) return '' as T;
   
   const variant = getVariant(testId);
   const value = test.variants[variant];
   
-  if (path && typeof value === 'object') {
-    return path.split('.').reduce((obj, key) => obj?.[key], value) as T;
+  if (path && typeof value === 'object' && value !== null) {
+    return path.split('.').reduce((obj: unknown, key: string) => {
+      return obj && typeof obj === 'object' && key in obj ? (obj as Record<string, unknown>)[key] : undefined;
+    }, value) as T;
   }
   
   return value as T;
 }
 
 // Track conversion events
-export function trackConversion(testId: string, event: string, metadata?: any) {
+export function trackConversion(testId: string, event: string, metadata?: Record<string, unknown>) {
   if (typeof window !== 'undefined' && window.analytics) {
     const variant = sessionStorage.getItem(`ab_${testId}`) || 'control';
     window.analytics.track('AB Test Conversion', {

@@ -53,7 +53,7 @@ export default function SocialProofSection() {
             </span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            From seed-stage startups to Series B scale-ups, we've helped teams 
+            From seed-stage startups to Series B scale-ups, we&apos;ve helped teams 
             build predictable revenue engines that actually work.
           </p>
         </motion.div>
@@ -106,7 +106,7 @@ export default function SocialProofSection() {
                   {testimonial.metric}
                 </span>
               </div>
-              <p className="text-gray-300 mb-6 italic">"{testimonial.quote}"</p>
+              <p className="text-gray-300 mb-6 italic">&quot;{testimonial.quote}&quot;</p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-green-500 rounded-full" />
                 <div>

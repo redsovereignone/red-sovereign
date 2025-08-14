@@ -20,7 +20,7 @@ interface ResultsPreviewProps {
 export default function ResultsPreview({ data }: ResultsPreviewProps) {
   useEffect(() => {
     analytics.previewViewed(data);
-  }, []);
+  }, [data]);
 
   return (
     <motion.div

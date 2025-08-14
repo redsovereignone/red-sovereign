@@ -147,7 +147,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-8 border-t border-gray-200">
           <p className="text-center text-gray-600 text-xs">
-            Built by founders who've scaled and exited B2B companies. 
+            Built by founders who&apos;ve scaled and exited B2B companies. 
             We practice what we preach.
           </p>
         </div>

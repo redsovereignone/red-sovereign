@@ -71,7 +71,7 @@ export default function CaseStudyStrip() {
             Real Results from Real Founders
           </h2>
           <p className="text-lg text-gray-600 leading-relaxed">
-            See what's possible in your first 90 days
+            See what&apos;s possible in your first 90 days
           </p>
         </motion.div>
 
@@ -111,7 +111,7 @@ export default function CaseStudyStrip() {
               {/* Quote */}
               <blockquote className="mb-6">
                 <p className="text-gray-700 italic">
-                  "{study.quote}"
+                  &quot;{study.quote}&quot;
                 </p>
               </blockquote>
 

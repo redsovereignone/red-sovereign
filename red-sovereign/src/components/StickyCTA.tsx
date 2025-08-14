@@ -69,14 +69,14 @@ export default function StickyCTA({ onCTAClick, isModalOpen }: StickyCTAProps) {
       window.removeEventListener('scroll', handleScroll);
       if (timeoutId) clearTimeout(timeoutId);
     };
-  }, [isModalOpen, isDismissed, hasBeenViewed]);
+  }, [isModalOpen, isDismissed, hasBeenViewed, isVisible]);
 
   // Hide when modal is open
   useEffect(() => {
     if (isModalOpen && isVisible) {
       setIsVisible(false);
     }
-  }, [isModalOpen]);
+  }, [isModalOpen, isVisible]);
 
   const handleDismiss = () => {
     analytics.stickyCTAClose();

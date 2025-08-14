@@ -40,7 +40,7 @@ export default function ProblemSection() {
             Is Your Marketing Budget a Coin Flip?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            You're investing in growth, but every dollar feels like a gamble. The usual options all carry fatal flaws:
+            You&apos;re investing in growth, but every dollar feels like a gamble. The usual options all carry fatal flaws:
           </p>
         </motion.div>
 
@@ -90,7 +90,7 @@ export default function ProblemSection() {
                 {traps[activeTab].description}
               </p>
               <p className="text-gray-500 italic">
-                You're stuck between running your business and trying to grow it.
+                You&apos;re stuck between running your business and trying to grow it.
               </p>
             </div>
           </motion.div>

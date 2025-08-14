@@ -27,7 +27,7 @@ export default function PlaybookSection({ onOpenPlaybook }: PlaybookSectionProps
             </span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-            Before you commit to anything, see exactly what we'd do to transform your growth.
+            Before you commit to anything, see exactly what we&apos;d do to transform your growth.
           </p>
           
           <motion.button

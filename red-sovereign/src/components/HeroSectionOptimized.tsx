@@ -188,7 +188,7 @@ export default function HeroSectionOptimized({ onOpenPlaybook }: HeroSectionProp
                 >
                   <div className="flex items-center gap-1 text-xs text-gray-400">
                     <Shield className="w-3 h-3 text-green-400" />
-                    Miss the goal? Next month's on us.
+                    Miss the goal? Next month&apos;s on us.
                   </div>
                 </motion.div>
               )}

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 interface RecoveryData {
-  data: any;
+  data: Record<string, unknown>;
   timestamp: number;
 }
 

@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { Variants, Transition } from 'framer-motion';
+import { Transition } from 'framer-motion';
 
 interface AnimationSettings {
   enableAnimations: boolean;
@@ -16,9 +16,9 @@ interface AnimationSettings {
 }
 
 interface OptimizedVariants {
-  initial: any;
-  animate: any;
-  exit?: any;
+  initial: Record<string, unknown>;
+  animate: Record<string, unknown>;
+  exit?: Record<string, unknown>;
   transition: Transition;
 }
 
@@ -50,16 +50,16 @@ export function useOptimizedAnimation() {
 
     // Get device performance tier
     const getPerformanceTier = (): 'high' | 'medium' | 'low' => {
-      const memory = (navigator as any).deviceMemory;
+      const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
       const cores = navigator.hardwareConcurrency;
       
       // Check connection speed
-      const connection = (navigator as any).connection;
+      const connection = (navigator as Navigator & { connection?: { effectiveType?: string } }).connection;
       const slowConnection = connection?.effectiveType === '2g' || connection?.effectiveType === 'slow-2g';
       
       if (slowConnection) return 'low';
-      if (memory >= 8 && cores >= 4) return 'high';
-      if (memory >= 4 && cores >= 2) return 'medium';
+      if (memory && memory >= 8 && cores >= 4) return 'high';
+      if (memory && memory >= 4 && cores >= 2) return 'medium';
       return 'low';
     };
 
@@ -253,9 +253,10 @@ export function useOptimizedAnimation() {
    */
   const staggerAnimation = (
     staggerDelay = 0.1,
-    maxItems?: number
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _maxItems?: number
   ): Transition => {
-    const effectiveMaxItems = maxItems || settings.maxAnimatedElements;
+    // const effectiveMaxItems = maxItems || settings.maxAnimatedElements; // TODO: Use for performance limiting
     
     if (!settings.enableAnimations) {
       return { staggerChildren: 0 };

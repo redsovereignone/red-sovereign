@@ -46,10 +46,11 @@ export async function GET(request: NextRequest) {
     } else {
       vaultCheck.RESEND_FROM_EMAIL = 'NOT SET';
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     vaultCheck = {
-      RESEND_API_KEY: 'Vault error: ' + error.message,
-      RESEND_FROM_EMAIL: 'Vault error: ' + error.message
+      RESEND_API_KEY: 'Vault error: ' + errorMessage,
+      RESEND_FROM_EMAIL: 'Vault error: ' + errorMessage
     };
   }
   
@@ -58,15 +59,17 @@ export async function GET(request: NextRequest) {
   try {
     const { Resend } = await import('resend');
     if (process.env.RESEND_API_KEY) {
-      const resend = new Resend(process.env.RESEND_API_KEY);
+      // Test instantiation without storing the instance
+      new Resend(process.env.RESEND_API_KEY);
       resendTest = 'Resend client created successfully (from env)';
     } else if (vaultCheck.RESEND_API_KEY.startsWith('SET')) {
       resendTest = 'Resend API key available in Vault';
     } else {
       resendTest = 'No API key to test with';
     }
-  } catch (error: any) {
-    resendTest = 'Error: ' + error.message;
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    resendTest = 'Error: ' + errorMessage;
   }
   
   return NextResponse.json({

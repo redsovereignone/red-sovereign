@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendLeadAlert } from '@/lib/email/resend';
 
-export async function GET(request: NextRequest) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function GET(_request: NextRequest) {
   console.log('Test email endpoint called');
   console.log('Environment check:');
   console.log('- RESEND_API_KEY:', process.env.RESEND_API_KEY ? 'SET' : 'NOT SET');
@@ -26,11 +27,12 @@ export async function GET(request: NextRequest) {
       error: result.error,
       timestamp: new Date().toISOString()
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Test email error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return NextResponse.json({
       success: false,
-      error: error.message,
+      error: errorMessage,
       timestamp: new Date().toISOString()
     }, { status: 500 });
   }

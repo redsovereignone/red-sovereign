@@ -21,7 +21,7 @@ export default function SolutionSection() {
             One Move. Two Wins: Expert Growth Execution + Enterprise Tech.
           </h2>
           <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-            One decision solves both your growth and cost challenges. You get a partner committed to predictable, self-funding growth plus the entire enterprise-grade tech stack to power it. That's expert execution and thousands in monthly savings in one package.
+            One decision solves both your growth and cost challenges. You get a partner committed to predictable, self-funding growth plus the entire enterprise-grade tech stack to power it. That&apos;s expert execution and thousands in monthly savings in one package.
           </p>
         </motion.div>
 
@@ -41,7 +41,7 @@ export default function SolutionSection() {
               </h3>
             </div>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Predictable growth doesn't come from luck, it comes from a system. We install a complete, data-driven growth engine inside your business, run by human experts who use AI as a force multiplier, not a replacement. The result: consistent growth that funds itself.
+              Predictable growth doesn&apos;t come from luck, it comes from a system. We install a complete, data-driven growth engine inside your business, run by human experts who use AI as a force multiplier, not a replacement. The result: consistent growth that funds itself.
             </p>
           </motion.div>
 

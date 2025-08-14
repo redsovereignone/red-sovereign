@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import Link from 'next/link'
 
 interface CTASectionProps {
   onOpenPlaybook?: () => void
