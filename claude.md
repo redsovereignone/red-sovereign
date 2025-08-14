@@ -212,14 +212,6 @@ Conversions: Check GA4 real-time
 Email Issues: Check Resend dashboard
 Database: Supabase dashboard
 Deploy Issues: Vercel dashboard
-Daily Checklist
-
- Check conversion metrics
- Review performance scores
- Check error logs
- Review A/B test results
- Check email delivery rates
- Monitor page speed
 
 Quality Standards
 

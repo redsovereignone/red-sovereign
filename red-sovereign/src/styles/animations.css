@@ -1,0 +1,109 @@
+/* Animation Performance Optimizations */
+
+/* Force GPU acceleration for all animated elements */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize text rendering for animations */
+.animated-text {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+
+/* Prevent layout shifts during animations */
+.stable-layout {
+  contain: layout style paint;
+  isolation: isolate;
+}
+
+/* High-performance gradient text */
+.gradient-text-optimized {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  /* Use GPU for gradient rendering */
+  transform: translateZ(0);
+  will-change: background-position;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animated-text,
+  .gpu-accelerated {
+    will-change: auto;
+  }
+}
+
+/* Performance hints for Chrome */
+@supports (contain: layout) {
+  .performance-container {
+    contain: layout style;
+  }
+}
+
+/* Layer promotion for complex animations */
+.promoted-layer {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  /* Create a new layer context */
+  position: relative;
+  z-index: 0;
+}
+
+/* Optimize hover states */
+.optimized-hover {
+  transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  will-change: transform;
+}
+
+.optimized-hover:hover {
+  transform: translateY(-2px) translateZ(0);
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile */
+  .mobile-simplified {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.2s !important;
+  }
+  
+  /* Disable complex effects on low-end devices */
+  @media (hover: none) and (pointer: coarse) {
+    .gpu-accelerated {
+      will-change: auto;
+    }
+    
+    .gradient-text-optimized {
+      background-size: 100% auto;
+    }
+  }
+}
+
+/* Critical rendering path optimization */
+.above-fold {
+  /* Prioritize rendering */
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Smooth scrolling with performance */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}

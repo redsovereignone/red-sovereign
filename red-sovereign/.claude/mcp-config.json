@@ -1,0 +1,33 @@
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref=lxjlatocuabjjaxkdsjq"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "sbp_5827c3e2d1e608a7dd5d161d86f50b3660c4401b"
+      }
+    },
+    "vercel": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@vercel/mcp-server@latest"
+      ],
+      "env": {
+        "VERCEL_TOKEN": "6r3H3JpUOh6Xm4EwflPmlNSO"
+      }
+    }
+  },
+  "notes": {
+    "setup": "To complete setup, you need to:",
+    "step1": "1. Go to https://supabase.com/dashboard/account/tokens",
+    "step2": "2. Create a new personal access token",
+    "step3": "3. Replace 'sbp_YOUR_PERSONAL_ACCESS_TOKEN_HERE' with your token",
+    "project_ref": "lxjlatocuabjjaxkdsjq",
+    "project_url": "https://lxjlatocuabjjaxkdsjq.supabase.co"
+  }
+}
