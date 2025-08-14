@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import Image from 'next/image'
 
 const testimonials = [
   {
@@ -26,8 +27,11 @@ const testimonials = [
 ]
 
 const logos = [
-  'Segment', 'Stripe', 'Datadog', 'Snowflake', 'Twilio', 
-  'Slack', 'Zoom', 'HubSpot', 'Salesforce', 'MongoDB'
+  { name: 'CloudBearing', src: '/logos/cloudbearing.png' },
+  { name: 'FrozenCPU', src: '/logos/frozencpu.png' },
+  { name: 'Sovereign AI', src: '/logos/sovereignai.jpg' },
+  { name: 'TechAssist', src: '/logos/techAssist.gif' },
+  { name: 'WellForce', src: '/logos/wellforce.png' }
 ]
 
 export default function SocialProofSection() {
@@ -142,10 +146,16 @@ export default function SocialProofSection() {
             >
               {[...logos, ...logos].map((logo, index) => (
                 <div
-                  key={`${logo}-${index}`}
-                  className="flex-shrink-0 text-gray-500 text-xl font-semibold opacity-50 hover:opacity-100 transition-opacity"
+                  key={`${logo.name}-${index}`}
+                  className="flex-shrink-0 opacity-50 hover:opacity-100 transition-opacity"
                 >
-                  {logo}
+                  <Image
+                    src={logo.src}
+                    alt={logo.name}
+                    width={120}
+                    height={40}
+                    className="h-10 w-auto object-contain filter grayscale hover:grayscale-0 transition-all"
+                  />
                 </div>
               ))}
             </motion.div>

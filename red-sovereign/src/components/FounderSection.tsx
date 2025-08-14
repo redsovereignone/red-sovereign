@@ -95,7 +95,7 @@ export default function FounderSection() {
                 className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 bg-white border border-gray-200 rounded-lg p-4"
               >
                 <Image
-                  src="/logos/cloudbearinglogo.png"
+                  src="/logos/cloudbearing.png"
                   alt="CloudBearing"
                   width={140}
                   height={50}
@@ -112,7 +112,7 @@ export default function FounderSection() {
                 className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 bg-white border border-gray-200 rounded-lg p-4"
               >
                 <Image
-                  src="/logos/1 - Logo horizontal 1 - PNG (transparente background).png"
+                  src="/logos/frozencpu.png"
                   alt="FrozenCPU"
                   width={140}
                   height={50}
@@ -129,7 +129,7 @@ export default function FounderSection() {
                 className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 bg-white border border-gray-200 rounded-lg p-4"
               >
                 <Image
-                  src="/logos/sovereign-ai7-final.jpg"
+                  src="/logos/sovereignai.jpg"
                   alt="Sovereign AI"
                   width={140}
                   height={50}
@@ -163,7 +163,7 @@ export default function FounderSection() {
                 className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 bg-white border border-gray-200 rounded-lg p-4"
               >
                 <Image
-                  src="/logos/wellforcelogo.svg"
+                  src="/logos/wellforce.png"
                   alt="WellForce"
                   width={140}
                   height={50}

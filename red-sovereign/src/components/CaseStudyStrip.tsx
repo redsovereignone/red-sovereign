@@ -20,7 +20,8 @@ interface CaseStudy {
 const caseStudies: CaseStudy[] = [
   {
     id: 'saas-growth',
-    clientName: 'TechScale SaaS',
+    clientLogo: '/logos/sovereignai.jpg',
+    clientName: 'Sovereign AI',
     personName: 'Sarah Chen',
     personTitle: 'CEO & Founder',
     quote: "Red Sovereign delivered exactly what they promised. Our pipeline is now predictable and scalable.",
@@ -29,7 +30,8 @@ const caseStudies: CaseStudy[] = [
   },
   {
     id: 'cost-reduction',
-    clientName: 'DevTools Pro',
+    clientLogo: '/logos/cloudbearing.png',
+    clientName: 'CloudBearing',
     personName: 'Michael Torres',
     personTitle: 'Head of Growth',
     quote: "We eliminated 5 tools and saved 12 hours per week on operations. The efficiency gains are incredible.",
@@ -38,7 +40,8 @@ const caseStudies: CaseStudy[] = [
   },
   {
     id: 'meetings-booked',
-    clientName: 'CloudOps Platform',
+    clientLogo: '/logos/wellforce.png',
+    clientName: 'WellForce',
     personName: 'Jessica Williams',
     personTitle: 'VP Marketing',
     quote: "The quality of meetings is what impressed me most. These are real opportunities, not just calls.",
@@ -82,6 +85,19 @@ export default function CaseStudyStrip() {
               transition={{ duration: 0.2, delay: index * 0.05 }}
               className="bg-white rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
             >
+              {/* Client logo */}
+              {study.clientLogo && (
+                <div className="mb-4 h-12 flex items-center">
+                  <Image
+                    src={study.clientLogo}
+                    alt={study.clientName}
+                    width={120}
+                    height={40}
+                    className="h-10 w-auto object-contain"
+                  />
+                </div>
+              )}
+              
               {/* Metric highlight */}
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">

@@ -25,25 +25,25 @@ const exitCompanies = [
   },
   {
     name: 'CloudBearing',
-    logo: '/logos/cloudbearinglogo.png',
+    logo: '/logos/cloudbearing.png',
     width: 140,
     height: 40
   },
   {
     name: 'FrozenCPU',
-    logo: '/logos/1 - Logo horizontal 1 - PNG (transparente background).png',
+    logo: '/logos/frozencpu.png',
     width: 120,
     height: 40
   },
   {
     name: 'Wellforce',
-    logo: '/logos/wellforcelogo.svg',
+    logo: '/logos/wellforce.png',
     width: 130,
     height: 40
   },
   {
     name: 'Sovereign AI',
-    logo: '/logos/sovereign-ai7-final.jpg',
+    logo: '/logos/sovereignai.jpg',
     width: 120,
     height: 40
   }
