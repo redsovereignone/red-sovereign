@@ -22,13 +22,34 @@ export default function ExitIntentModal({ onOpenPlaybook }: ExitIntentModalProps
     if (hasShown) return;
 
     let dwellTimer: NodeJS.Timeout;
+    let exitTimer: NodeJS.Timeout;
     let scrollCount = 0;
+    let hasBeenOnPageLongEnough = false;
     const isMobile = window.innerWidth < 768;
+    
+    // Wait 20 seconds before enabling exit intent
+    setTimeout(() => {
+      hasBeenOnPageLongEnough = true;
+    }, 20000); // 20 seconds minimum time on page
 
-    // Desktop: rapid mouse leave at top
+    // Desktop: mouse leave at top with delay
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 10 && !hasShown) {
-        showModal();
+      // Only trigger if user has been on page for at least 20 seconds
+      if (!hasBeenOnPageLongEnough) return;
+      
+      // Increased threshold to 30px and added delay
+      if (e.clientY <= 30 && !hasShown) {
+        // Add 750ms delay to prevent accidental triggers
+        exitTimer = setTimeout(() => {
+          showModal();
+        }, 750);
+      }
+    };
+    
+    const handleMouseEnter = () => {
+      // Cancel exit intent if mouse comes back
+      if (exitTimer) {
+        clearTimeout(exitTimer);
       }
     };
 
@@ -69,23 +90,26 @@ export default function ExitIntentModal({ onOpenPlaybook }: ExitIntentModalProps
 
     if (!isMobile) {
       document.addEventListener('mouseleave', handleMouseLeave);
+      document.addEventListener('mouseenter', handleMouseEnter);
     } else {
       window.addEventListener('scroll', handleScroll);
       window.addEventListener('popstate', handlePopState);
       
-      // Start dwell timer on mobile
+      // Start dwell timer on mobile - increased to 90 seconds
       dwellTimer = setTimeout(() => {
         if (scrollCount >= 2 && !hasShown) {
           showModal();
         }
-      }, 60000);
+      }, 90000); // 90 seconds for mobile
     }
 
     return () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseenter', handleMouseEnter);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('popstate', handlePopState);
       if (dwellTimer) clearTimeout(dwellTimer);
+      if (exitTimer) clearTimeout(exitTimer);
     };
   }, [hasShown]);
 

@@ -52,19 +52,48 @@ export default function HomePage() {
 
   // Enhanced exit intent detection for Playbook abandonment
   useEffect(() => {
+    let hasBeenOnPageLongEnough = false
+    let exitIntentTimeout: NodeJS.Timeout
+    
+    // Wait 15 seconds before enabling exit intent
+    const enableTimer = setTimeout(() => {
+      hasBeenOnPageLongEnough = true
+    }, 15000) // 15 seconds minimum time on page
+    
     const handleMouseLeave = (e: MouseEvent) => {
+      // Only trigger if user has been on page for at least 15 seconds
+      if (!hasBeenOnPageLongEnough) return
+      
       // Check if there's incomplete playbook data
       const playbookData = sessionStorage.getItem('playbookWizardData')
       const hasIncomplete = playbookData && !hasLeadBeenCreated
       
       // Trigger exit intent if leaving viewport from top and has incomplete session
-      if (e.clientY <= 0 && hasIncomplete && !isPlaybookOpen && !showExitIntent) {
-        setShowExitIntent(true)
+      // Increased threshold to 50px to reduce sensitivity
+      if (e.clientY <= 50 && hasIncomplete && !isPlaybookOpen && !showExitIntent) {
+        // Add a 500ms delay to prevent accidental triggers
+        exitIntentTimeout = setTimeout(() => {
+          setShowExitIntent(true)
+        }, 500)
+      }
+    }
+    
+    const handleMouseEnter = () => {
+      // Cancel exit intent if mouse comes back
+      if (exitIntentTimeout) {
+        clearTimeout(exitIntentTimeout)
       }
     }
 
     document.addEventListener('mouseleave', handleMouseLeave)
-    return () => document.removeEventListener('mouseleave', handleMouseLeave)
+    document.addEventListener('mouseenter', handleMouseEnter)
+    
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave)
+      document.removeEventListener('mouseenter', handleMouseEnter)
+      clearTimeout(enableTimer)
+      if (exitIntentTimeout) clearTimeout(exitIntentTimeout)
+    }
   }, [hasLeadBeenCreated, isPlaybookOpen, showExitIntent])
 
   const handleOpenPlaybook = () => {

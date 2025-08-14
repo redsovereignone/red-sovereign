@@ -99,11 +99,11 @@ export default function ExitIntent({ isOpen, onClose, onContinue }: ExitIntentPr
                       <Mail className="w-8 h-8 text-red-400" />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-2">
-                      Wait! Don't lose your progress
+                      Save Your Progress?
                     </h3>
                     <p className="text-gray-400">
-                      You're so close to getting your personalized growth playbook. 
-                      Save your progress or continue now.
+                      You've started building your personalized growth playbook. 
+                      Would you like to continue now or save it for later?
                     </p>
                   </div>
 
