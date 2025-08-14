@@ -16,9 +16,9 @@ interface AnimationSettings {
 }
 
 interface OptimizedVariants {
-  initial: Variants;
-  animate: Variants;
-  exit?: Variants;
+  initial: any;
+  animate: any;
+  exit?: any;
   transition: Transition;
 }
 

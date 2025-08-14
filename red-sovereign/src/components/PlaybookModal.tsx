@@ -152,10 +152,10 @@ export default function PlaybookModal({ isOpen, onClose, onLeadCreated }: Playbo
   const handleQuestionAnswer = (value: string | Record<string, string>) => {
     const question = QUESTIONS[currentQuestion];
     
-    if (question.type === 'text' && question.fields) {
+    if (question.type === 'text' && question.fields && typeof value === 'object') {
       // Handle multi-field text inputs
       setData(prev => ({ ...prev, ...value }));
-    } else if (question.field) {
+    } else if (question.field && typeof value === 'string') {
       // Handle single select inputs
       setData(prev => ({ ...prev, [question.field]: value }));
     }

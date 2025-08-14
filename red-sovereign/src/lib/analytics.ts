@@ -101,6 +101,10 @@ export function trackEvent(eventName: string, properties?: Record<string, any>):
 
 // Specific event tracking functions
 export const analytics = {
+  // Generic tracking function
+  trackEvent: (eventName: string, properties?: Record<string, any>) => 
+    trackEvent(eventName, properties),
+  
   // Hero events
   heroCTAClick: (variant: string) => 
     trackEvent('hero_cta_click', { variant }),

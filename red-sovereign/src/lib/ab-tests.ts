@@ -156,7 +156,7 @@ export function getVariant(testId: string): TestVariant {
 // Weighted random assignment
 function assignVariant(test: ABTest): TestVariant {
   const variants = Object.keys(test.variants) as TestVariant[];
-  const weights = test.weights || {};
+  const weights: Record<string, number> = test.weights || {};
   
   // Default equal weights if not specified
   const totalWeight = variants.reduce((sum, v) => sum + (weights[v] || 1), 0);

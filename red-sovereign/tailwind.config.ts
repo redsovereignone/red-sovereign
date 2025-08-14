@@ -48,12 +48,10 @@ const config: Config = {
       },
       
       fontWeight: {
-        light: String(designTokens.typography.weight.light),
         regular: String(designTokens.typography.weight.regular),
         medium: String(designTokens.typography.weight.medium),
         semibold: String(designTokens.typography.weight.semibold),
         bold: String(designTokens.typography.weight.bold),
-        black: String(designTokens.typography.weight.black),
       },
       
       lineHeight: {
@@ -61,7 +59,6 @@ const config: Config = {
         snug: String(designTokens.typography.lineHeight.snug),
         normal: String(designTokens.typography.lineHeight.normal),
         relaxed: String(designTokens.typography.lineHeight.relaxed),
-        loose: String(designTokens.typography.lineHeight.loose),
       },
       
       spacing: designTokens.spacing.scale,
@@ -69,7 +66,6 @@ const config: Config = {
       backgroundImage: {
         // All gradients from tokens
         'gradient-primary': designTokens.colors.gradients.primary,
-        'gradient-premium': designTokens.colors.gradients.premium,
         'gradient-red-glow': designTokens.colors.gradients.redGlow,
         'gradient-text': designTokens.colors.gradients.textGradient,
         'gradient-mesh': designTokens.colors.gradients.mesh,
@@ -84,7 +80,6 @@ const config: Config = {
         lg: designTokens.effects.shadows.lg,
         xl: designTokens.effects.shadows.xl,
         'red-glow': designTokens.effects.shadows.redGlow,
-        'red-glow-strong': designTokens.effects.shadows.redGlowStrong,
         'glow-red': designTokens.colors.interactive.glowRed,
         'glow-subtle': designTokens.colors.interactive.glowSubtle,
       },
@@ -165,9 +160,6 @@ const config: Config = {
         smooth: designTokens.animation.easing.smooth,
         'smooth-out': designTokens.animation.easing.smoothOut,
         'smooth-in': designTokens.animation.easing.smoothIn,
-        bounce: designTokens.animation.easing.bounce,
-        elastic: designTokens.animation.easing.elastic,
-        dramatic: designTokens.animation.easing.dramatic,
       },
       
       backdropBlur: {
@@ -247,7 +239,7 @@ const config: Config = {
           boxShadow: designTokens.effects.shadows.redGlow,
         },
         '.glow-red-xl': {
-          boxShadow: designTokens.effects.shadows.redGlowStrong,
+          boxShadow: designTokens.effects.shadows.redGlow,
         },
         
         // Text shadows

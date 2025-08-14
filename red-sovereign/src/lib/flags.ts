@@ -27,13 +27,13 @@ export function getFeatureFlags(): FeatureFlags {
   if (typeof window === 'undefined') {
     // Server-side
     return {
-      single_path_hero: process.env.NEXT_PUBLIC_FLAG_SINGLE_PATH_HERO === 'true' ?? defaultFlags.single_path_hero,
-      proof_strip_hero: process.env.NEXT_PUBLIC_FLAG_PROOF_STRIP_HERO === 'true' ?? defaultFlags.proof_strip_hero,
-      modal_wizard_email_first: process.env.NEXT_PUBLIC_FLAG_MODAL_WIZARD_EMAIL_FIRST === 'true' ?? defaultFlags.modal_wizard_email_first,
-      price_gate_post_preview: process.env.NEXT_PUBLIC_FLAG_PRICE_GATE_POST_PREVIEW === 'true' ?? defaultFlags.price_gate_post_preview,
-      risk_reversal_badge: process.env.NEXT_PUBLIC_FLAG_RISK_REVERSAL_BADGE === 'true' ?? defaultFlags.risk_reversal_badge,
-      sticky_cta: process.env.NEXT_PUBLIC_FLAG_STICKY_CTA === 'true' ?? defaultFlags.sticky_cta,
-      exit_intent_offer: process.env.NEXT_PUBLIC_FLAG_EXIT_INTENT_OFFER === 'true' ?? defaultFlags.exit_intent_offer,
+      single_path_hero: process.env.NEXT_PUBLIC_FLAG_SINGLE_PATH_HERO ? process.env.NEXT_PUBLIC_FLAG_SINGLE_PATH_HERO === 'true' : defaultFlags.single_path_hero,
+      proof_strip_hero: process.env.NEXT_PUBLIC_FLAG_PROOF_STRIP_HERO ? process.env.NEXT_PUBLIC_FLAG_PROOF_STRIP_HERO === 'true' : defaultFlags.proof_strip_hero,
+      modal_wizard_email_first: process.env.NEXT_PUBLIC_FLAG_MODAL_WIZARD_EMAIL_FIRST ? process.env.NEXT_PUBLIC_FLAG_MODAL_WIZARD_EMAIL_FIRST === 'true' : defaultFlags.modal_wizard_email_first,
+      price_gate_post_preview: process.env.NEXT_PUBLIC_FLAG_PRICE_GATE_POST_PREVIEW ? process.env.NEXT_PUBLIC_FLAG_PRICE_GATE_POST_PREVIEW === 'true' : defaultFlags.price_gate_post_preview,
+      risk_reversal_badge: process.env.NEXT_PUBLIC_FLAG_RISK_REVERSAL_BADGE ? process.env.NEXT_PUBLIC_FLAG_RISK_REVERSAL_BADGE === 'true' : defaultFlags.risk_reversal_badge,
+      sticky_cta: process.env.NEXT_PUBLIC_FLAG_STICKY_CTA ? process.env.NEXT_PUBLIC_FLAG_STICKY_CTA === 'true' : defaultFlags.sticky_cta,
+      exit_intent_offer: process.env.NEXT_PUBLIC_FLAG_EXIT_INTENT_OFFER ? process.env.NEXT_PUBLIC_FLAG_EXIT_INTENT_OFFER === 'true' : defaultFlags.exit_intent_offer,
     };
   }
   

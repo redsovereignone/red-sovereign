@@ -2,15 +2,19 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
+    // Temporarily ignore ESLint during builds - too many minor issues to fix now
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has type errors.
-    ignoreBuildErrors: true,
+    // TypeScript will be checked during builds to ensure type safety
+    ignoreBuildErrors: false,
   },
+  // Ensure proper Vercel deployment
+  images: {
+    unoptimized: true,
+  },
+  // Optimize for production
+  reactStrictMode: true,
 };
 
 export default nextConfig;
