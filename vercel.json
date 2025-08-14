@@ -1,3 +1,5 @@
 {
-  "root": "red-sovereign"
+  "buildCommand": "cd red-sovereign && npm run typecheck && npm run build",
+  "installCommand": "cd red-sovereign && npm install",
+  "outputDirectory": "red-sovereign/.next"
 }
