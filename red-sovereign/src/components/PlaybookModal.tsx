@@ -33,7 +33,7 @@ const QUESTIONS = [
     subtitle: 'We\'ll analyze your website and current positioning',
     fields: [
       { id: 'companyName', label: 'Company Name', placeholder: 'Red Sovereign', required: true },
-      { id: 'websiteUrl', label: 'Website URL', placeholder: 'https://redsovereign.com', required: true, type: 'url' }
+      { id: 'websiteUrl', label: 'Website URL', placeholder: 'redsovereign.com', required: true, type: 'url' }
     ],
     icon: '🏢',
     valueAdd: 'Analyzing your current web presence...'
@@ -390,10 +390,18 @@ function QuestionStep({
           newErrors[field.id] = `${field.label} is required`;
         }
         if (field.type === 'url' && localValues[field.id]) {
+          let urlValue = localValues[field.id].trim();
+          
+          // Add https:// if no protocol is specified
+          if (urlValue && !urlValue.match(/^https?:\/\//i)) {
+            urlValue = 'https://' + urlValue;
+            setLocalValues(prev => ({ ...prev, [field.id]: urlValue }));
+          }
+          
           try {
-            new URL(localValues[field.id]);
+            new URL(urlValue);
           } catch {
-            newErrors[field.id] = 'Please enter a valid URL';
+            newErrors[field.id] = 'Please enter a valid domain (e.g., example.com)';
           }
         }
       });
@@ -434,13 +442,19 @@ function QuestionStep({
                 {field.label} {field.required && <span className="text-red-400">*</span>}
               </label>
               <input
-                type={field.type || 'text'}
+                type={field.type === 'url' ? 'text' : field.type || 'text'}
                 value={localValues[field.id] || ''}
                 onChange={(e) => {
                   setLocalValues(prev => ({ ...prev, [field.id]: e.target.value }));
                   setErrors(prev => ({ ...prev, [field.id]: '' }));
                 }}
-                placeholder={field.placeholder}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleTextSubmit();
+                  }
+                }}
+                placeholder={field.type === 'url' ? 'example.com or https://example.com' : field.placeholder}
                 className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors"
               />
               {errors[field.id] && (

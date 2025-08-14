@@ -14,10 +14,16 @@ export async function POST(request: NextRequest) {
                      headersList.get('x-real-ip') || 
                      'Unknown';
     
+    // Normalize website URL - add https:// if missing
+    let websiteUrl = data.websiteUrl || '';
+    if (websiteUrl && !websiteUrl.match(/^https?:\/\//i)) {
+      websiteUrl = 'https://' + websiteUrl;
+    }
+    
     // Prepare submission data matching the updated schema
     const submissionData = {
       company_name: data.companyName,
-      website_url: data.websiteUrl,
+      website_url: websiteUrl,
       contact_email: data.contactEmail,
       ttm_revenue: data.ttmRevenue,
       current_growth_rate: data.currentGrowthRate,
@@ -69,7 +75,7 @@ export async function POST(request: NextRequest) {
     // Send lead alert email
     const emailResult = await sendLeadAlert({
       companyName: data.companyName,
-      websiteUrl: data.websiteUrl,
+      websiteUrl: websiteUrl,
       contactEmail: data.contactEmail,
       ttmRevenue: data.ttmRevenue,
       currentGrowthRate: data.currentGrowthRate,
