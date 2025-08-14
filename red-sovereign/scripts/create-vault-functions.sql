@@ -1,0 +1,71 @@
+-- Create Vault Functions Only (secrets already exist)
+-- Run this in Supabase SQL Editor to create the helper functions
+
+-- Ensure extensions are enabled
+CREATE EXTENSION IF NOT EXISTS vault;
+CREATE EXTENSION IF NOT EXISTS pgsodium;
+
+-- Create function to GET a secret from the vault
+CREATE OR REPLACE FUNCTION get_secret(secret_name text)
+RETURNS text
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+DECLARE
+  secret_value text;
+BEGIN
+  -- Only allow service role to access secrets
+  IF auth.role() != 'service_role' THEN
+    RAISE EXCEPTION 'Unauthorized access to secrets';
+  END IF;
+  
+  SELECT decrypted_secret INTO secret_value
+  FROM vault.decrypted_secrets
+  WHERE name = secret_name;
+  
+  IF secret_value IS NULL THEN
+    RAISE EXCEPTION 'Secret % not found', secret_name;
+  END IF;
+  
+  RETURN secret_value;
+END;
+$$;
+
+-- Create function to SET a secret in the vault (for future use)
+CREATE OR REPLACE FUNCTION set_secret(secret_name text, secret_value text)
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+BEGIN
+  -- Only allow service role to set secrets
+  IF auth.role() != 'service_role' THEN
+    RAISE EXCEPTION 'Unauthorized access to secrets';
+  END IF;
+  
+  -- Delete existing secret if it exists
+  DELETE FROM vault.secrets WHERE name = secret_name;
+  
+  -- Insert new secret
+  INSERT INTO vault.secrets (name, secret)
+  VALUES (secret_name, secret_value);
+END;
+$$;
+
+-- Grant execute permissions to service role only
+REVOKE ALL ON FUNCTION get_secret(text) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION get_secret(text) TO service_role;
+
+REVOKE ALL ON FUNCTION set_secret(text, text) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION set_secret(text, text) TO service_role;
+
+-- Add documentation
+COMMENT ON FUNCTION get_secret(text) IS 'Retrieves a secret from the vault. Only accessible by service role.';
+COMMENT ON FUNCTION set_secret(text, text) IS 'Sets a secret in the vault. Only accessible by service role.';
+
+-- Verify your existing secrets are there
+SELECT name FROM vault.secrets;
+
+-- You should see your RESEND_API_KEY and other secrets listed
