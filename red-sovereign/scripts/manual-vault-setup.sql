@@ -1,9 +1,12 @@
--- Enable required extensions if not already enabled
+-- Manual Vault Setup Script for Supabase
+-- Run this in the SQL Editor in your Supabase Dashboard
+
+-- Step 1: Ensure Vault extension is enabled
 CREATE EXTENSION IF NOT EXISTS vault;
 CREATE EXTENSION IF NOT EXISTS pgsodium;
 
--- Create a function to get a secret from the vault
--- This is a security definer function that can only be called from server-side code
+-- Step 2: Create the helper functions for accessing secrets
+-- Function to get a secret from the vault
 CREATE OR REPLACE FUNCTION get_secret(secret_name text)
 RETURNS text
 LANGUAGE plpgsql
@@ -30,7 +33,7 @@ BEGIN
 END;
 $$;
 
--- Create a function to set a secret in the vault
+-- Function to set a secret in the vault
 CREATE OR REPLACE FUNCTION set_secret(secret_name text, secret_value text)
 RETURNS void
 LANGUAGE plpgsql
@@ -59,6 +62,22 @@ GRANT EXECUTE ON FUNCTION get_secret(text) TO service_role;
 REVOKE ALL ON FUNCTION set_secret(text, text) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION set_secret(text, text) TO service_role;
 
--- Add a comment to document the functions
-COMMENT ON FUNCTION get_secret(text) IS 'Retrieves a secret from the vault. Only accessible by service role.';
-COMMENT ON FUNCTION set_secret(text, text) IS 'Sets a secret in the vault. Only accessible by service role.';
+-- Step 3: Store your secrets
+-- IMPORTANT: Replace these with your actual values!
+SELECT set_secret('RESEND_API_KEY', 'YOUR_ACTUAL_RESEND_API_KEY_HERE');
+SELECT set_secret('RESEND_FROM_EMAIL', 'report@marketing.sovereignai.co');
+
+-- Step 4: Verify the secrets were stored
+SELECT name FROM vault.secrets;
+
+-- You should see:
+-- name
+-- ----------------
+-- RESEND_API_KEY
+-- RESEND_FROM_EMAIL
+
+-- Step 5: Test retrieval (optional)
+-- This will only work if you're running as service_role
+-- SELECT get_secret('RESEND_API_KEY');
+
+-- Done! Your secrets are now stored securely in Vault.

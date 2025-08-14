@@ -8,29 +8,40 @@ Instead of relying on environment variables (which were causing issues on Vercel
 
 ## Setup Instructions
 
-### 1. Enable Vault Extension in Supabase
+### 1. Verify Vault is Available
+
+Vault is enabled by default on all Supabase projects. To verify it's available:
 
 1. Go to your Supabase dashboard
-2. Navigate to Database → Extensions
-3. Find "vault" in the list and enable it
-4. Wait for the extension to be activated
-
-### 2. Run the Migration
-
-Apply the Vault functions migration to your database:
-
-```bash
-# From the project root
-npm run supabase:migrate
+2. Navigate to SQL Editor
+3. Run this query to check:
+   ```sql
+   SELECT * FROM pg_extension WHERE extname = 'vault';
+   ```
+   
+If it's not enabled (rare), you can enable it:
+```sql
+CREATE EXTENSION IF NOT EXISTS vault;
 ```
 
-This creates two secure functions:
-- `get_secret(secret_name)` - Retrieves a secret from the vault
-- `set_secret(secret_name, secret_value)` - Stores a secret in the vault
+### 2. Set Up Vault Functions and Secrets
 
-### 3. Set Up Your Secrets
+You have two options:
 
-#### Option A: Using the Setup Script (Recommended)
+#### Option A: Use SQL Editor (Recommended for Production)
+
+1. Go to your Supabase Dashboard → SQL Editor
+2. Open the file `scripts/manual-vault-setup.sql`
+3. Replace `YOUR_ACTUAL_RESEND_API_KEY_HERE` with your actual Resend API key
+4. Run the entire script
+
+This will:
+- Enable Vault extension
+- Create the secure functions
+- Store your secrets
+- Verify they were saved
+
+#### Option B: Using Node.js Setup Script
 
 1. Ensure you have these environment variables in your `.env.local`:
    ```
@@ -45,23 +56,7 @@ This creates two secure functions:
    node scripts/setup-vault-secrets.mjs
    ```
 
-#### Option B: Manual Setup via SQL Editor
-
-1. Go to Supabase Dashboard → SQL Editor
-2. Run the following SQL commands:
-
-```sql
--- Set RESEND_API_KEY
-SELECT set_secret('RESEND_API_KEY', 'your_resend_api_key_here');
-
--- Set RESEND_FROM_EMAIL (optional, defaults to report@marketing.sovereignai.co)
-SELECT set_secret('RESEND_FROM_EMAIL', 'your_from_email@domain.com');
-
--- Verify the secrets were set
-SELECT name FROM vault.secrets;
-```
-
-### 4. Deploy to Vercel
+### 3. Deploy to Vercel
 
 The application will now automatically use the Vault secrets. Make sure your Vercel deployment has these environment variables:
 
