@@ -1,17 +1,46 @@
 import { Resend } from 'resend';
+import { supabaseAdmin } from '@/lib/supabase/server';
 
 // Lazy initialization to avoid build-time issues
 let resend: Resend | null = null;
 
-function getResendClient() {
+async function getResendClient() {
   if (!resend) {
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-      console.error('RESEND_API_KEY is not set in environment variables');
-      throw new Error('RESEND_API_KEY environment variable is not set');
+    try {
+      // First try to get the API key from Supabase Vault
+      console.log('Fetching Resend API key from Supabase Vault...');
+      
+      const { data, error } = await supabaseAdmin.rpc('get_secret', {
+        secret_name: 'RESEND_API_KEY'
+      });
+      
+      if (error) {
+        console.error('Error fetching secret from Vault:', error);
+        // Fallback to environment variable
+        const apiKey = process.env.RESEND_API_KEY;
+        if (!apiKey) {
+          console.error('RESEND_API_KEY not found in Vault or environment variables');
+          throw new Error('RESEND_API_KEY not configured');
+        }
+        console.log('Using RESEND_API_KEY from environment variable (fallback)');
+        resend = new Resend(apiKey);
+      } else if (data) {
+        console.log('Successfully retrieved RESEND_API_KEY from Supabase Vault');
+        resend = new Resend(data);
+      } else {
+        throw new Error('RESEND_API_KEY not found in Vault');
+      }
+    } catch (error) {
+      console.error('Failed to initialize Resend client:', error);
+      // Final fallback to environment variable
+      const apiKey = process.env.RESEND_API_KEY;
+      if (apiKey) {
+        console.log('Using RESEND_API_KEY from environment variable (error fallback)');
+        resend = new Resend(apiKey);
+      } else {
+        throw new Error('Unable to initialize Resend client - no API key available');
+      }
     }
-    console.log('Initializing Resend client with API key:', apiKey.substring(0, 10) + '...');
-    resend = new Resend(apiKey);
   }
   return resend;
 }
@@ -192,10 +221,23 @@ View in Supabase: https://supabase.com/dashboard/project/lxjlatocuabjjaxkdsjq/ed
   `;
   
   try {
-    const fromEmail = process.env.RESEND_FROM_EMAIL || 'report@marketing.sovereignai.co';
+    // Get the from email from Vault or environment
+    let fromEmail = 'report@marketing.sovereignai.co';
+    try {
+      const { data: fromEmailData } = await supabaseAdmin.rpc('get_secret', {
+        secret_name: 'RESEND_FROM_EMAIL'
+      });
+      if (fromEmailData) {
+        fromEmail = fromEmailData;
+      }
+    } catch (e) {
+      // Use environment variable as fallback
+      fromEmail = process.env.RESEND_FROM_EMAIL || 'report@marketing.sovereignai.co';
+    }
+    
     console.log('Attempting to send email from:', fromEmail, 'to: nick@redsovereign.com');
     
-    const resendClient = getResendClient();
+    const resendClient = await getResendClient();
     const response = await resendClient.emails.send({
       from: fromEmail,
       to: ['nick@redsovereign.com'], // Send to Nick

@@ -6,7 +6,7 @@ import { sendLeadAlert } from '@/lib/email/resend';
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
-    const headersList = headers();
+    const headersList = await headers();
     
     // Get client information
     const userAgent = headersList.get('user-agent') || 'Unknown';
