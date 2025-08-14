@@ -1,6 +1,18 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization to avoid build-time issues
+let resend: Resend | null = null;
+
+function getResendClient() {
+  if (!resend) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not set');
+    }
+    resend = new Resend(apiKey);
+  }
+  return resend;
+}
 
 export interface LeadAlertData {
   companyName: string;
@@ -178,7 +190,8 @@ View in Supabase: https://supabase.com/dashboard/project/lxjlatocuabjjaxkdsjq/ed
   `;
   
   try {
-    const response = await resend.emails.send({
+    const resendClient = getResendClient();
+    const response = await resendClient.emails.send({
       from: process.env.RESEND_FROM_EMAIL || 'report@marketing.sovereignai.co',
       to: ['nick@redsovereign.com'], // Send to Nick
       subject: `🎯 New Lead: ${companyName} - ${ttmRevenue} Revenue`,
