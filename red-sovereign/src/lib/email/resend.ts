@@ -235,11 +235,13 @@ View in Supabase: https://supabase.com/dashboard/project/lxjlatocuabjjaxkdsjq/ed
       fromEmail = process.env.RESEND_FROM_EMAIL || 'report@marketing.sovereignai.co';
     }
     
-    console.log('Attempting to send email from:', fromEmail, 'to: nick@redsovereign.com');
+    // Format the from address with a display name
+    const fromAddress = `Red Sovereign Leads <${fromEmail}>`;
+    console.log('Attempting to send email from:', fromAddress, 'to: nick@redsovereign.com');
     
     const resendClient = await getResendClient();
     const response = await resendClient.emails.send({
-      from: fromEmail,
+      from: fromAddress,
       to: ['nick@redsovereign.com'], // Send to Nick
       subject: `🎯 New Lead: ${companyName} - ${ttmRevenue} Revenue`,
       html: emailHtml,
