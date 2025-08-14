@@ -73,28 +73,36 @@ export async function POST(request: NextRequest) {
       }]);
     
     // Send lead alert email
-    const emailResult = await sendLeadAlert({
-      companyName: data.companyName,
-      websiteUrl: websiteUrl,
-      contactEmail: data.contactEmail,
-      ttmRevenue: data.ttmRevenue,
-      currentGrowthRate: data.currentGrowthRate,
-      targetGrowthRate: data.targetGrowthRate,
-      biggestChallenge: data.biggestChallenge,
-      submittedAt: submission.created_at,
-      submissionId: submission.id
-    });
+    console.log('Preparing to send lead alert email for:', data.companyName);
     
-    if (emailResult.success) {
-      console.log('Lead alert email sent successfully:', emailResult.emailId);
+    try {
+      const emailResult = await sendLeadAlert({
+        companyName: data.companyName,
+        websiteUrl: websiteUrl,
+        contactEmail: data.contactEmail,
+        ttmRevenue: data.ttmRevenue,
+        currentGrowthRate: data.currentGrowthRate,
+        targetGrowthRate: data.targetGrowthRate,
+        biggestChallenge: data.biggestChallenge,
+        submittedAt: submission.created_at,
+        submissionId: submission.id
+      });
       
-      // Update submission record with email sent status
-      await supabaseAdmin
-        .from('playbook_submissions')
-        .update({ email_sent: true })
-        .eq('id', submission.id);
-    } else {
-      console.error('Failed to send lead alert email');
+      if (emailResult.success) {
+        console.log('Lead alert email sent successfully:', emailResult.emailId);
+        
+        // Update submission record with email sent status
+        await supabaseAdmin
+          .from('playbook_submissions')
+          .update({ email_sent: true })
+          .eq('id', submission.id);
+      } else {
+        console.error('Failed to send lead alert email - emailResult.success was false');
+        console.error('Email error:', emailResult.error);
+      }
+    } catch (emailError) {
+      console.error('Exception while sending lead alert email:', emailError);
+      // Don't throw - we still want to return success for the submission
     }
     
     return NextResponse.json({ 

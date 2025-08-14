@@ -7,8 +7,10 @@ function getResendClient() {
   if (!resend) {
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
+      console.error('RESEND_API_KEY is not set in environment variables');
       throw new Error('RESEND_API_KEY environment variable is not set');
     }
+    console.log('Initializing Resend client with API key:', apiKey.substring(0, 10) + '...');
     resend = new Resend(apiKey);
   }
   return resend;
@@ -190,18 +192,24 @@ View in Supabase: https://supabase.com/dashboard/project/lxjlatocuabjjaxkdsjq/ed
   `;
   
   try {
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'report@marketing.sovereignai.co';
+    console.log('Attempting to send email from:', fromEmail, 'to: nick@redsovereign.com');
+    
     const resendClient = getResendClient();
     const response = await resendClient.emails.send({
-      from: process.env.RESEND_FROM_EMAIL || 'report@marketing.sovereignai.co',
+      from: fromEmail,
       to: ['nick@redsovereign.com'], // Send to Nick
       subject: `🎯 New Lead: ${companyName} - ${ttmRevenue} Revenue`,
       html: emailHtml,
       text: emailText,
     });
     
+    console.log('Email sent successfully with ID:', response.data?.id);
     return { success: true, emailId: response.data?.id };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to send lead alert email:', error);
+    console.error('Error details:', error?.message || 'Unknown error');
+    console.error('Error response:', error?.response?.data || 'No response data');
     return { success: false, error };
   }
 }
