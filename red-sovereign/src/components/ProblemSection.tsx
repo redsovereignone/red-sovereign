@@ -37,7 +37,7 @@ export default function ProblemSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-            Is Your Marketing Budget a Coin Flip?
+            Stop the Marketing Coin Flip
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             You&apos;re investing in growth, but every dollar feels like a gamble. The usual options all carry fatal flaws:
