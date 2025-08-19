@@ -1,0 +1,27 @@
+{
+  "name": "Red Sovereign - B2B SaaS Growth Marketing",
+  "short_name": "Red Sovereign",
+  "description": "Predictable revenue growth for B2B SaaS companies. Get your 90-day growth plan.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAF8",
+  "theme_color": "#EF4444",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["business", "marketing", "saas"],
+  "lang": "en-US",
+  "dir": "ltr"
+}
