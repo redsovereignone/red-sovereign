@@ -15,6 +15,30 @@ const nextConfig: NextConfig = {
   },
   // Optimize for production
   reactStrictMode: true,
+
+  // Fix cross-origin issues in development
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+        ],
+      },
+    ];
+  },
+
+  // Allow development origins for iframe embedding
+  experimental: {
+    allowedOrigins: [
+      '*.fly.dev',
+      'localhost:*',
+      '127.0.0.1:*',
+    ],
+  },
 };
 
 export default nextConfig;
