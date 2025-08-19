@@ -15,6 +15,25 @@ const nextConfig: NextConfig = {
   },
   // Optimize for production
   reactStrictMode: true,
+
+  // Fix cross-origin issues in development
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+        ],
+      },
+    ];
+  },
+
+  // Allow development origins for iframe embedding
+  // Note: allowedDevOrigins requires Next.js 15.x+ and proper configuration
+  // For now, we handle CORS through headers
 };
 
 export default nextConfig;
