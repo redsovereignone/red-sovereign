@@ -106,14 +106,99 @@ export const metadata: Metadata = {
   },
 };
 
+// Structured Data for Business
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://redsovereign.com/#organization",
+      "name": "Red Sovereign",
+      "url": "https://redsovereign.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://redsovereign.com/logo.png",
+        "width": 1200,
+        "height": 630
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "url": "https://app.reclaim.ai/m/redsovereign"
+      },
+      "sameAs": [
+        "https://linkedin.com/company/red-sovereign"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Nick Vossburg"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://redsovereign.com/#website",
+      "url": "https://redsovereign.com",
+      "name": "Red Sovereign",
+      "description": "B2B SaaS Growth Marketing Services",
+      "publisher": {
+        "@id": "https://redsovereign.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://redsovereign.com/#service",
+      "name": "B2B SaaS Growth Marketing",
+      "description": "Complete growth engine for B2B SaaS companies scaling from $1M to $20M ARR",
+      "provider": {
+        "@id": "https://redsovereign.com/#organization"
+      },
+      "serviceType": "Marketing Services",
+      "areaServed": "Worldwide",
+      "offers": {
+        "@type": "Offer",
+        "price": "7500",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "7500",
+          "priceCurrency": "USD",
+          "unitText": "per month"
+        },
+        "description": "Fractional growth team for B2B SaaS companies"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://redsovereign.com/#webpage",
+      "url": "https://redsovereign.com",
+      "name": "Red Sovereign - Predictable Revenue Growth for B2B SaaS",
+      "isPartOf": {
+        "@id": "https://redsovereign.com/#website"
+      },
+      "about": {
+        "@id": "https://redsovereign.com/#organization"
+      },
+      "description": "Get a complete growth engine for 1/3 the cost of a Marketing Director. Join 50+ B2B SaaS companies achieving predictable growth.",
+      "inLanguage": "en-US"
+    }
+  ]
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body 
+    <html lang="en" prefix="og: https://ogp.me/ns#">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
+      <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#FAFAF8] text-[#0F172A]`}
         suppressHydrationWarning
       >
