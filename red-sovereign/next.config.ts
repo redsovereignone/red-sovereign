@@ -32,13 +32,8 @@ const nextConfig: NextConfig = {
   },
 
   // Allow development origins for iframe embedding
-  experimental: {
-    allowedOrigins: [
-      '*.fly.dev',
-      'localhost:*',
-      '127.0.0.1:*',
-    ],
-  },
+  // Note: allowedDevOrigins requires Next.js 15.x+ and proper configuration
+  // For now, we handle CORS through headers
 };
 
 export default nextConfig;
