@@ -9,7 +9,7 @@ export function organizationSchema() {
     logo: `${site.url}/logo.png`,
     description: site.description,
     email: site.email,
-    sameAs: [site.linkedin],
+    sameAs: [site.linkedin, site.twitter],
     founder: {
       "@type": "Person",
       name: site.founder.name,

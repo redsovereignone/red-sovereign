@@ -14,21 +14,21 @@ const layers = [
   {
     num: "01",
     name: "Activate",
-    desc: "AI productivity training that goes far beyond chatbot Q&A. Your team learns to use advanced AI tools — Claude, Cowork, browser agents — to fundamentally change how they work every day.",
+    desc: "AI productivity training that goes far beyond chatbot Q&A. Your team learns to use advanced AI tools like Claude, Cowork, and browser agents to fundamentally change how they work every day.",
     outcome:
       "Your people become 2–3× more productive with the roles they already have. Fastest time-to-value. The foundation for everything else.",
   },
   {
     num: "02",
     name: "Automate",
-    desc: "We audit your operations and identify the manual, repetitive processes that eat margin. Then we build the automations — not with expensive middleware, but with AI agents that handle real work.",
+    desc: "We audit your operations and identify the manual, repetitive processes that eat margin. Then we build the automations, not with expensive middleware, but with AI agents that handle real work.",
     outcome:
       "Measurable reduction in manual labor. Faster throughput. Lower cost per unit of delivery. You scale without scaling headcount.",
   },
   {
     num: "03",
     name: "Build",
-    desc: "Custom software, AI agents, and new products built with AI-powered development. We build the first version alongside your team — a working system, not a prototype that dies on the vine.",
+    desc: "Custom software, AI agents, and new products built with AI-powered development. We build the first version alongside your team: a working system, not a prototype that dies on the vine.",
     outcome:
       "New revenue streams. Productized services. Proprietary tools your competitors can't buy. The kind of leverage that used to require a $500K dev budget.",
   },
@@ -55,7 +55,7 @@ const layers = [
     >
       Not a chatbot implementation. Not a strategy deck that gathers dust. We
       train your team, automate your operations, build your first custom AI
-      solutions — then put the processes in place so your organization keeps
+      solutions, then put the processes in place so your organization keeps
       building on its own.
     </p>
 
@@ -64,7 +64,7 @@ const layers = [
     >
       {
         layers.map((layer, i) => (
-          <div class="grid md:grid-cols-[200px_1fr_1fr] max-md:grid-cols-1 bg-black hover:bg-surface transition-colors duration-300">
+          <div class="grid md:grid-cols-[240px_1fr_1fr] max-md:grid-cols-1 bg-black hover:bg-surface transition-colors duration-300">
             <div class="p-10 max-md:p-6 flex flex-col justify-center md:border-r border-cream/[0.06] max-md:border-b max-md:border-cream/[0.06]">
               <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red mb-3">
                 <Fragment set:html={layerIcons[i]} />

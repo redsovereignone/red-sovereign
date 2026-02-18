@@ -4,11 +4,11 @@ import { site } from "@/data/site";
 export const prerender = true;
 
 export const GET: APIRoute = () => {
-  const body = `# Red Sovereign — robots.txt
+  const body = `# Red Sovereign | robots.txt
 User-agent: *
 Allow: /
 
-# AI Crawlers — explicitly welcomed
+# AI Crawlers - explicitly welcomed
 User-agent: GPTBot
 Allow: /
 
