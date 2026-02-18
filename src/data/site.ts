@@ -5,7 +5,7 @@ export const site = {
     "Red Sovereign helps businesses become AI-capable organizations. Train your team, automate operations, build custom software. No dev team required.",
   url: "https://redsovereign.com",
   email: "info@redsovereign.com",
-  linkedin: "https://linkedin.com/in/nickvossburg",
+  linkedin: "https://www.linkedin.com/in/nvossburg/",
   twitter: "https://x.com/redsovereign",
   booking: "https://app.reclaim.ai/m/redsovereign",
   ogImage: "/og-image.jpg",
