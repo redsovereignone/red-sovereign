@@ -1,6 +1,13 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import JsonLd from "@/components/astro/JsonLd.astro";
 import { getCollection, render } from "astro:content";
+import {
+  blogPostSchema,
+  breadcrumbSchema,
+  faqSchema,
+} from "@/lib/schemas";
+import { site } from "@/data/site";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -11,14 +18,41 @@ export async function getStaticPaths() {
 }
 
 const post = Astro.props;
-const { Content } = await render(post);
+const { Content, remarkPluginFrontmatter } = await render(post);
+const minutesRead = remarkPluginFrontmatter.minutesRead;
+const wordCount = remarkPluginFrontmatter.wordCount;
+const postUrl = `${site.url}/blog/${post.id}`;
+const hasFaqs = post.data.faqs && post.data.faqs.length > 0;
 ---
 
 <BaseLayout
   title={post.data.title}
   description={post.data.description}
   ogType="article"
+  canonical={post.data.canonicalUrl}
 >
+  <JsonLd
+    schema={blogPostSchema({
+      title: post.data.title,
+      description: post.data.description,
+      pubDate: post.data.pubDate,
+      updatedDate: post.data.updatedDate,
+      author: post.data.author,
+      image: post.data.image,
+      url: postUrl,
+      wordCount,
+      tags: post.data.tags,
+    })}
+  />
+  <JsonLd
+    schema={breadcrumbSchema([
+      { name: "Home", url: site.url },
+      { name: "Blog", url: `${site.url}/blog` },
+      { name: post.data.title, url: postUrl },
+    ])}
+  />
+  {hasFaqs && <JsonLd schema={faqSchema(post.data.faqs!)} />}
+
   <article class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
     <div class="max-w-[720px] mx-auto">
       <a
@@ -29,25 +63,63 @@ const { Content } = await render(post);
       </a>
 
       <header class="mt-8 mb-12">
-        <time
-          class="text-cream-dim text-[0.8rem] font-display tracking-[0.1em] uppercase"
+        <div
+          class="flex items-center gap-3 text-cream-dim text-[0.8rem] font-display tracking-[0.1em] uppercase"
         >
-          {
-            post.data.pubDate.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })
-          }
-        </time>
+          <time datetime={post.data.pubDate.toISOString()}>
+            {
+              post.data.pubDate.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </time>
+          <span aria-hidden="true">&middot;</span>
+          <span>{minutesRead}</span>
+        </div>
+
         <h1
           class="font-display text-[clamp(2rem,4vw,3rem)] font-extrabold leading-[1.1] tracking-tight mt-4"
         >
           {post.data.title}
         </h1>
+
         <p class="font-serif text-cream-muted text-[1.15rem] mt-4">
           {post.data.description}
         </p>
+
+        <div class="flex items-center gap-4 mt-6">
+          <span class="text-cream-muted text-sm" rel="author"
+            >By {post.data.author}</span
+          >
+          {
+            post.data.updatedDate && (
+              <span class="text-cream-dim text-sm">
+                Updated{" "}
+                <time datetime={post.data.updatedDate.toISOString()}>
+                  {post.data.updatedDate.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+              </span>
+            )
+          }
+        </div>
+
+        {
+          post.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mt-4">
+              {post.data.tags.map((tag: string) => (
+                <span class="text-[0.75rem] font-display tracking-wide uppercase text-cream-dim border border-cream/[0.08] rounded-full px-3 py-1">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )
+        }
       </header>
 
       <div

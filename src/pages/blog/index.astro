@@ -1,16 +1,36 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import JsonLd from "@/components/astro/JsonLd.astro";
+import { getCollection, render } from "astro:content";
+import { webPageSchema } from "@/lib/schemas";
+import { site } from "@/data/site";
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const posts = (
+  await getCollection("blog", ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  })
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const readingTimes: Record<string, string> = {};
+for (const post of posts) {
+  const { remarkPluginFrontmatter } = await render(post);
+  readingTimes[post.id] = remarkPluginFrontmatter.minutesRead;
+}
 ---
 
 <BaseLayout
   title="Blog"
   description="Insights on AI strategy, automation, and building AI-capable organizations from Red Sovereign."
 >
+  <JsonLd
+    schema={webPageSchema({
+      name: "Red Sovereign Blog",
+      description:
+        "Insights on AI strategy, automation, and building AI-capable organizations.",
+      url: `${site.url}/blog`,
+    })}
+  />
+
   <section class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
     <div class="max-w-[800px] mx-auto">
       <div class="section-tag">Blog</div>
@@ -28,19 +48,32 @@ const posts = (await getCollection("blog")).sort(
                 href={`/blog/${post.id}`}
                 class="block p-8 border border-cream/[0.06] rounded-sm bg-surface hover:border-red/30 transition-colors duration-300 no-underline"
               >
-                <time class="text-cream-dim text-[0.8rem] font-display tracking-[0.1em] uppercase">
-                  {post.data.pubDate.toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </time>
+                <div class="flex items-center gap-3 text-cream-dim text-[0.8rem] font-display tracking-[0.1em] uppercase">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                  <span aria-hidden="true">&middot;</span>
+                  <span>{readingTimes[post.id]}</span>
+                </div>
                 <h2 class="font-display text-xl font-bold mt-2 mb-2 text-cream">
                   {post.data.title}
                 </h2>
                 <p class="text-cream-muted text-[0.95rem]">
                   {post.data.description}
                 </p>
+                {post.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mt-3">
+                    {post.data.tags.map((tag: string) => (
+                      <span class="text-[0.7rem] font-display tracking-wide uppercase text-cream-dim border border-cream/[0.06] rounded-full px-2.5 py-0.5">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </a>
             ))}
           </div>
