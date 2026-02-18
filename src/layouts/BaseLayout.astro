@@ -23,6 +23,7 @@ const props = Astro.props;
   <head>
     <SEOHead {...props} />
     <JsonLd schema={[organizationSchema(), webSiteSchema()]} />
+    <script is:inline src="https://analytics.ahrefs.com/analytics.js" data-key="FJHFMPENBhbseFxbcHVf+Q" async></script>
   </head>
   <body class="grain-overlay">
     <Navbar />
