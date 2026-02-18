@@ -1,0 +1,41 @@
+---
+import { site, navLinks } from "@/data/site";
+---
+
+<nav
+  class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-10 py-5 bg-black/85 backdrop-blur-xl border-b border-cream/[0.04] transition-all duration-[400ms]"
+>
+  <a href="/" class="flex items-center">
+    <img src="/logo.png" alt={site.name} class="h-8 w-auto" />
+  </a>
+
+  <ul class="hidden md:flex items-center gap-10 list-none">
+    {
+      navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="text-cream-muted text-[0.85rem] font-medium tracking-[0.04em] uppercase no-underline hover:text-cream transition-colors duration-300"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+    <li>
+      <a
+        href="/#review"
+        class="bg-red text-cream px-5 py-2.5 rounded-sm font-display font-semibold text-[0.8rem] tracking-[0.06em] hover:bg-red-glow hover:shadow-[0_0_30px_rgba(200,16,46,0.3)] transition-all duration-300"
+      >
+        AI Possibilities Review
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<script>
+  const nav = document.querySelector("nav");
+  window.addEventListener("scroll", () => {
+    nav?.classList.toggle("scrolled", window.scrollY > 60);
+  });
+</script>

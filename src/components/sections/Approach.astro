@@ -1,0 +1,80 @@
+---
+const layers = [
+  {
+    num: "01",
+    name: "Activate",
+    desc: "AI productivity training that goes far beyond chatbot Q&A. Your team learns to use advanced AI tools — Claude, Cowork, browser agents — to fundamentally change how they work every day.",
+    outcome:
+      "Your people become 2–3× more productive with the roles they already have. Fastest time-to-value. The foundation for everything else.",
+  },
+  {
+    num: "02",
+    name: "Automate",
+    desc: "We audit your operations and identify the manual, repetitive processes that eat margin. Then we build the automations — not with expensive middleware, but with AI agents that handle real work.",
+    outcome:
+      "Measurable reduction in manual labor. Faster throughput. Lower cost per unit of delivery. You scale without scaling headcount.",
+  },
+  {
+    num: "03",
+    name: "Build",
+    desc: "Custom software, AI agents, and new products built with AI-powered development. We build the first version alongside your team — a working system, not a prototype that dies on the vine.",
+    outcome:
+      "New revenue streams. Productized services. Proprietary tools your competitors can't buy. The kind of leverage that used to require a $500K dev budget.",
+  },
+  {
+    num: "04",
+    name: "Operate",
+    desc: "We train your team to use AI-powered development tools, establish governance frameworks including security reviews, and set up the processes for your organization to continuously build and ship on its own.",
+    outcome:
+      "Your business becomes its own development shop. No vendor dependency. No dev team required. You own the capability permanently.",
+  },
+];
+---
+
+<section id="approach" class="py-28 px-10 max-md:py-16 max-md:px-6">
+  <div class="max-w-[1200px] mx-auto fade-in">
+    <div class="section-tag">What We Do</div>
+    <h2
+      class="font-display text-[clamp(2rem,4vw,3.2rem)] font-extrabold leading-[1.1] tracking-tight mb-6"
+    >
+      We make your business <span class="text-red">AI-capable.</span>
+    </h2>
+    <p
+      class="font-serif text-[1.2rem] text-cream-muted max-w-[680px] leading-relaxed mb-16"
+    >
+      Not a chatbot implementation. Not a strategy deck that gathers dust. We
+      train your team, automate your operations, build your first custom AI
+      solutions — then put the processes in place so your organization keeps
+      building on its own.
+    </p>
+
+    <div
+      class="grid gap-px bg-cream/[0.06] border border-cream/[0.06] rounded-sm overflow-hidden"
+    >
+      {
+        layers.map((layer) => (
+          <div class="grid md:grid-cols-[200px_1fr_1fr] max-md:grid-cols-1 bg-black hover:bg-surface transition-colors duration-300">
+            <div class="p-10 max-md:p-6 flex flex-col justify-center md:border-r border-cream/[0.06] max-md:border-b max-md:border-cream/[0.06]">
+              <span class="font-display text-[0.65rem] font-bold tracking-[0.2em] uppercase text-red">
+                Layer {layer.num}
+              </span>
+              <strong class="font-display text-2xl font-extrabold mt-1">
+                {layer.name}
+              </strong>
+            </div>
+            <div class="p-10 max-md:p-6 max-md:pb-0 md:border-r border-cream/[0.06]">
+              <p class="text-cream-muted text-[0.95rem] leading-relaxed">
+                {layer.desc}
+              </p>
+            </div>
+            <div class="p-10 max-md:p-6 max-md:pt-2">
+              <p class="font-serif italic text-cream text-base leading-relaxed">
+                {layer.outcome}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

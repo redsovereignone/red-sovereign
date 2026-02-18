@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Red Sovereign — Your Business Doesn't Need an AI Vendor</title>
+<meta name="description" content="Red Sovereign helps businesses become AI-capable organizations. Train your team, automate operations, build custom software — no dev team required.">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #08080A;
+  --surface: #111113;
+  --surface-2: #1A1A1E;
+  --surface-3: #232328;
+  --red: #C8102E;
+  --red-glow: #E8253F;
+  --red-dark: #8B0A1E;
+  --cream: #F0EDE6;
+  --cream-muted: #A09E98;
+  --cream-dim: #6B6964;
+  --font-display: 'Syne', sans-serif;
+  --font-serif: 'Source Serif 4', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--red);
+  color: var(--cream);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(8,8,10,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(240,237,230,0.04);
+  transition: all 0.4s ease;
+}
+
+nav.scrolled {
+  padding: 0.9rem 2.5rem;
+  background: rgba(8,8,10,0.95);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-logo img {
+  height: 32px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--cream-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover { color: var(--cream); }
+
+.nav-cta {
+  background: var(--red) !important;
+  color: var(--cream) !important;
+  padding: 0.6rem 1.4rem;
+  border-radius: 2px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.06em;
+  transition: all 0.3s ease !important;
+}
+
+.nav-cta:hover {
+  background: var(--red-glow) !important;
+  box-shadow: 0 0 30px rgba(200,16,46,0.3);
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem 2.5rem 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(200,16,46,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,16,46,0.2), transparent);
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-tag {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero-tag::before {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background: var(--red);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 900px;
+  margin-bottom: 2rem;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--red);
+}
+
+.hero-sub {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  line-height: 1.7;
+  color: var(--cream-muted);
+  max-width: 620px;
+  margin-bottom: 3rem;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--red);
+  color: var(--cream);
+  padding: 1rem 2rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.hero-cta:hover {
+  background: var(--red-glow);
+  box-shadow: 0 4px 40px rgba(200,16,46,0.3);
+  transform: translateY(-1px);
+}
+
+.hero-cta svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.hero-cta:hover svg { transform: translateX(4px); }
+
+/* ── SECTION DEFAULTS ── */
+section {
+  padding: 7rem 2.5rem;
+  position: relative;
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-tag {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-tag::before {
+  content: '';
+  width: 1.5rem;
+  height: 1px;
+  background: var(--red);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+h2 em { font-style: normal; color: var(--red); }
+
+/* ── PROBLEM/OPPORTUNITY ── */
+.problem {
+  background: var(--surface);
+  border-top: 1px solid rgba(240,237,230,0.04);
+  border-bottom: 1px solid rgba(240,237,230,0.04);
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.problem-card {
+  padding: 2.5rem;
+  border: 1px solid rgba(240,237,230,0.06);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.problem-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+
+.problem-card.waiting::before { background: var(--cream-dim); }
+.problem-card.building::before { background: var(--red); }
+
+.problem-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.problem-card.waiting h3 { color: var(--cream-dim); }
+.problem-card.building h3 { color: var(--red); }
+
+.problem-card p {
+  color: var(--cream-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.problem-card .highlight {
+  color: var(--cream);
+  font-weight: 500;
+}
+
+/* ── APPROACH / LAYERS ── */
+.approach-intro {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--cream-muted);
+  max-width: 680px;
+  line-height: 1.8;
+  margin-bottom: 4rem;
+}
+
+.layers {
+  display: grid;
+  gap: 1px;
+  background: rgba(240,237,230,0.06);
+  border: 1px solid rgba(240,237,230,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.layer {
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  background: var(--black);
+  transition: background 0.3s ease;
+}
+
+.layer:hover { background: var(--surface); }
+
+.layer-num {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(240,237,230,0.06);
+}
+
+.layer-num span {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.layer-num strong {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-top: 0.25rem;
+}
+
+.layer-desc {
+  padding: 2.5rem;
+  border-right: 1px solid rgba(240,237,230,0.06);
+}
+
+.layer-desc p {
+  color: var(--cream-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.layer-outcome {
+  padding: 2.5rem;
+}
+
+.layer-outcome p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--cream);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ── DIFFERENTIATOR ── */
+.diff {
+  background: var(--surface);
+  border-top: 1px solid rgba(240,237,230,0.04);
+  border-bottom: 1px solid rgba(240,237,230,0.04);
+}
+
+.diff-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  margin-top: 3rem;
+}
+
+.diff-text {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.85;
+  color: var(--cream-muted);
+}
+
+.diff-text p + p { margin-top: 1.5rem; }
+
+.diff-text strong { color: var(--cream); font-weight: 600; }
+
+.diff-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.stat-card {
+  padding: 2rem;
+  background: var(--surface-2);
+  border: 1px solid rgba(240,237,230,0.04);
+  border-radius: 3px;
+}
+
+.stat-card .number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--red);
+  line-height: 1;
+}
+
+.stat-card .label {
+  font-size: 0.85rem;
+  color: var(--cream-muted);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+/* ── CREDIBILITY ── */
+.cred-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.cred-item {
+  padding: 2rem;
+  border: 1px solid rgba(240,237,230,0.06);
+  border-radius: 3px;
+  transition: border-color 0.3s ease;
+}
+
+.cred-item:hover { border-color: rgba(200,16,46,0.3); }
+
+.cred-item h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.cred-item p {
+  color: var(--cream-muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* ── AI POSSIBILITIES REVIEW ── */
+.review {
+  background: var(--surface);
+  border-top: 1px solid rgba(240,237,230,0.04);
+}
+
+.review-container {
+  max-width: 720px;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+
+.review-intro {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--cream-muted);
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+/* Progress bar */
+.review-progress {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+}
+
+.progress-segment {
+  flex: 1;
+  height: 3px;
+  background: var(--surface-3);
+  border-radius: 2px;
+  transition: background 0.4s ease;
+}
+
+.progress-segment.active { background: var(--red); }
+
+/* Question card */
+.question-card {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.question-card.hidden { display: none; }
+
+.q-number {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+}
+
+.q-text {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 2rem;
+}
+
+.q-options {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.q-option {
+  display: block;
+  width: 100%;
+  padding: 1.1rem 1.5rem;
+  background: var(--surface-2);
+  border: 1px solid rgba(240,237,230,0.06);
+  border-radius: 3px;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.q-option:hover {
+  border-color: var(--red);
+  background: var(--surface-3);
+}
+
+.q-option.selected {
+  border-color: var(--red);
+  background: rgba(200,16,46,0.08);
+}
+
+/* Results */
+.review-results {
+  display: none;
+}
+
+.review-results.visible { display: block; }
+
+.results-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.results-header h3 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.results-header p {
+  font-family: var(--font-serif);
+  color: var(--cream-muted);
+  font-size: 1.1rem;
+}
+
+.result-opportunity {
+  padding: 2rem;
+  background: var(--surface-2);
+  border-left: 2px solid var(--red);
+  margin-bottom: 1.25rem;
+  border-radius: 0 3px 3px 0;
+}
+
+.result-opportunity h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.result-opportunity p {
+  color: var(--cream-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.result-opportunity .impact {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.results-cta {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 3rem;
+  border: 1px solid rgba(200,16,46,0.2);
+  border-radius: 3px;
+  background: rgba(200,16,46,0.03);
+}
+
+.results-cta h4 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.results-cta p {
+  color: var(--cream-muted);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.results-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--red);
+  color: var(--cream);
+  padding: 1rem 2.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.results-cta a:hover {
+  background: var(--red-glow);
+  box-shadow: 0 4px 40px rgba(200,16,46,0.3);
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 4rem 2.5rem;
+  border-top: 1px solid rgba(240,237,230,0.04);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-logo img {
+  height: 28px;
+  width: auto;
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.footer-links a {
+  color: var(--cream-dim);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover { color: var(--cream); }
+
+.footer-copy {
+  color: var(--cream-dim);
+  font-size: 0.8rem;
+}
+
+/* ── ANIMATIONS ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  
+  section { padding: 4rem 1.5rem; }
+  .hero { padding: 7rem 1.5rem 4rem; }
+  
+  .problem-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  
+  .layer {
+    grid-template-columns: 1fr;
+  }
+  
+  .layer-num {
+    border-right: none;
+    border-bottom: 1px solid rgba(240,237,230,0.06);
+    padding: 1.5rem 2rem;
+  }
+  
+  .layer-desc {
+    border-right: none;
+    padding: 1.5rem 2rem 0;
+  }
+  
+  .layer-outcome { padding: 0.5rem 2rem 1.5rem; }
+  
+  .diff-content { grid-template-columns: 1fr; gap: 2.5rem; }
+  .diff-stats { grid-template-columns: 1fr 1fr; }
+  
+  .cred-grid { grid-template-columns: 1fr; }
+  
+  .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+}
+
+/* Grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  opacity: 0.015;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo"><img src="logo.png" alt="Red Sovereign"></a>
+  <ul class="nav-links">
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#difference">Why Us</a></li>
+    <li><a href="#review" class="nav-cta">AI Possibilities Review</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">AI Strategy &amp; Transformation</div>
+    <h1>Your business doesn't need an AI vendor. It needs to <em>become</em> one.</h1>
+    <p class="hero-sub">The cost of building custom software has collapsed. What took a dev team and six figures now takes weeks and costs almost nothing. Every business you compete with will figure this out eventually. The ones that figure it out first don't just get ahead — they rewrite the rules.</p>
+    <a href="#review" class="hero-cta">
+      Take the AI Possibilities Review
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ── PROBLEM / OPPORTUNITY ── -->
+<section class="problem">
+  <div class="section-inner fade-in">
+    <div class="section-tag">The Fork in the Road</div>
+    <h2>In this race, standing still means <em>falling behind.</em></h2>
+    <div class="problem-grid">
+      <div class="problem-card waiting">
+        <h3>The Consumer Strategy</h3>
+        <p>Wait for Microsoft, Salesforce, and Intuit to ship AI features into software you already buy. Copilot writes your emails. Einstein scores your leads. You feel like you're keeping up — <span class="highlight">but so is everyone else. You're running just to stay in the same place.</span></p>
+      </div>
+      <div class="problem-card building">
+        <h3>The Builder Strategy</h3>
+        <p>Recognize that the collapse in development cost means you can build <span class="highlight">proprietary software, AI agents, and automated workflows designed around your specific business.</span> Things no competitor can buy off the shelf. Products you own. Margins you keep. This is how you run faster than the landscape moves.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── APPROACH ── -->
+<section id="approach">
+  <div class="section-inner fade-in">
+    <div class="section-tag">What We Do</div>
+    <h2>We make your business <em>AI-capable.</em></h2>
+    <p class="approach-intro">Not a chatbot implementation. Not a strategy deck that gathers dust. We train your team, automate your operations, build your first custom AI solutions — then put the processes in place so your organization keeps building on its own.</p>
+    
+    <div class="layers">
+      <div class="layer">
+        <div class="layer-num">
+          <span>Layer 01</span>
+          <strong>Activate</strong>
+        </div>
+        <div class="layer-desc">
+          <p>AI productivity training that goes far beyond chatbot Q&A. Your team learns to use advanced AI tools — Claude, Cowork, browser agents — to fundamentally change how they work every day.</p>
+        </div>
+        <div class="layer-outcome">
+          <p>Your people become 2–3× more productive with the roles they already have. Fastest time-to-value. The foundation for everything else.</p>
+        </div>
+      </div>
+      
+      <div class="layer">
+        <div class="layer-num">
+          <span>Layer 02</span>
+          <strong>Automate</strong>
+        </div>
+        <div class="layer-desc">
+          <p>We audit your operations and identify the manual, repetitive processes that eat margin. Then we build the automations — not with expensive middleware, but with AI agents that handle real work.</p>
+        </div>
+        <div class="layer-outcome">
+          <p>Measurable reduction in manual labor. Faster throughput. Lower cost per unit of delivery. You scale without scaling headcount.</p>
+        </div>
+      </div>
+      
+      <div class="layer">
+        <div class="layer-num">
+          <span>Layer 03</span>
+          <strong>Build</strong>
+        </div>
+        <div class="layer-desc">
+          <p>Custom software, AI agents, and new products built with AI-powered development. We build the first version alongside your team — a working system, not a prototype that dies on the vine.</p>
+        </div>
+        <div class="layer-outcome">
+          <p>New revenue streams. Productized services. Proprietary tools your competitors can't buy. The kind of leverage that used to require a $500K dev budget.</p>
+        </div>
+      </div>
+      
+      <div class="layer">
+        <div class="layer-num">
+          <span>Layer 04</span>
+          <strong>Operate</strong>
+        </div>
+        <div class="layer-desc">
+          <p>We train your team to use AI-powered development tools, establish governance frameworks including security reviews, and set up the processes for your organization to continuously build and ship on its own.</p>
+        </div>
+        <div class="layer-outcome">
+          <p>Your business becomes its own development shop. No vendor dependency. No dev team required. You own the capability permanently.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DIFFERENTIATOR ── -->
+<section class="diff" id="difference">
+  <div class="section-inner fade-in">
+    <div class="section-tag">Why Red Sovereign</div>
+    <h2>Built by a founder. <em>For founders.</em></h2>
+    <div class="diff-content">
+      <div class="diff-text">
+        <p>Most AI consultants sell theory. Most dev shops want you dependent on them. We're different because we've done this — <strong>built three companies from scratch, scaled them, and sold them.</strong> We understand what it takes to grow a business because we've had to make the same decisions you face.</p>
+        <p>We don't hand you a strategy deck and disappear. We build the first version with you, train your team to own it, and set up the guardrails so you don't need us anymore. <strong>Our success means your independence.</strong></p>
+        <p>And we practice what we preach — our own operations run on the same AI-native systems we build for clients.</p>
+      </div>
+      <div class="diff-stats">
+        <div class="stat-card">
+          <div class="number">25</div>
+          <div class="label">Years building and scaling companies</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">3</div>
+          <div class="label">Companies built and successfully exited</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">$10M+</div>
+          <div class="label">Revenue generated through go-to-market strategy</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">100%</div>
+          <div class="label">AI-native — we build with what we teach</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CREDIBILITY ── -->
+<section>
+  <div class="section-inner fade-in">
+    <div class="section-tag">Track Record</div>
+    <h2>We've been on <em>your side</em> of the table.</h2>
+    <div class="cred-grid">
+      <div class="cred-item">
+        <h4>FrozenCPU → Built & Sold</h4>
+        <p>Built a leading PC hardware company from the ground up. Designed the product, the operations, the customer experience — then executed a successful exit.</p>
+      </div>
+      <div class="cred-item">
+        <h4>CloudBearing → $4M Exit</h4>
+        <p>Identified the cloud migration wave early. Built a services company around it, scaled it, and sold it for $4M — in a market that didn't exist five years prior.</p>
+      </div>
+      <div class="cred-item">
+        <h4>Microsoft Azure GTM</h4>
+        <p>Led go-to-market strategy generating over $10M in revenue. Enterprise-scale execution with startup-speed decision making.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AI POSSIBILITIES REVIEW ── -->
+<section class="review" id="review">
+  <div class="section-inner">
+    <div class="section-tag" style="justify-content: center;">AI Possibilities Review</div>
+    <h2 style="text-align: center;">Discover what AI can <em>actually do</em> for your business.</h2>
+    
+    <div class="review-container">
+      <p class="review-intro">Answer five quick questions. We'll show you the specific opportunities most businesses in your position are missing — and what acting on them could look like.</p>
+      
+      <div id="assessment">
+        <div class="review-progress">
+          <div class="progress-segment" id="prog-1"></div>
+          <div class="progress-segment" id="prog-2"></div>
+          <div class="progress-segment" id="prog-3"></div>
+          <div class="progress-segment" id="prog-4"></div>
+          <div class="progress-segment" id="prog-5"></div>
+        </div>
+        
+        <!-- Q1 -->
+        <div class="question-card" id="q1">
+          <div class="q-number">Question 01 of 05</div>
+          <div class="q-text">What best describes your business?</div>
+          <div class="q-options">
+            <button class="q-option" onclick="answer(1, 'services')">Professional services or consulting</button>
+            <button class="q-option" onclick="answer(1, 'tech')">Technology or SaaS company</button>
+            <button class="q-option" onclick="answer(1, 'trades')">Trades, field services, or operations-heavy</button>
+            <button class="q-option" onclick="answer(1, 'other')">Other B2B business</button>
+          </div>
+        </div>
+        
+        <!-- Q2 -->
+        <div class="question-card hidden" id="q2">
+          <div class="q-number">Question 02 of 05</div>
+          <div class="q-text">How many people are on your team?</div>
+          <div class="q-options">
+            <button class="q-option" onclick="answer(2, 'solo')">Just me</button>
+            <button class="q-option" onclick="answer(2, 'small')">2–10 people</button>
+            <button class="q-option" onclick="answer(2, 'mid')">11–50 people</button>
+            <button class="q-option" onclick="answer(2, 'large')">50+ people</button>
+          </div>
+        </div>
+        
+        <!-- Q3 -->
+        <div class="question-card hidden" id="q3">
+          <div class="q-number">Question 03 of 05</div>
+          <div class="q-text">What's the biggest constraint on your growth right now?</div>
+          <div class="q-options">
+            <button class="q-option" onclick="answer(3, 'scale')">Can't scale without hiring more people</button>
+            <button class="q-option" onclick="answer(3, 'manual')">Too much manual work eating our margins</button>
+            <button class="q-option" onclick="answer(3, 'compete')">Competitors are moving faster than us</button>
+            <button class="q-option" onclick="answer(3, 'product')">We want to launch new offerings but lack dev resources</button>
+          </div>
+        </div>
+        
+        <!-- Q4 -->
+        <div class="question-card hidden" id="q4">
+          <div class="q-number">Question 04 of 05</div>
+          <div class="q-text">Where is your team with AI today?</div>
+          <div class="q-options">
+            <button class="q-option" onclick="answer(4, 'none')">Barely using it — maybe some ChatGPT here and there</button>
+            <button class="q-option" onclick="answer(4, 'basic')">Basic use — writing emails, summarizing docs, Q&A</button>
+            <button class="q-option" onclick="answer(4, 'moderate')">Moderate — some workflows and automations in place</button>
+            <button class="q-option" onclick="answer(4, 'advanced')">Advanced — building custom tools and agents</button>
+          </div>
+        </div>
+        
+        <!-- Q5 -->
+        <div class="question-card hidden" id="q5">
+          <div class="q-number">Question 05 of 05</div>
+          <div class="q-text">If AI could change one thing about your business this year, what matters most?</div>
+          <div class="q-options">
+            <button class="q-option" onclick="answer(5, 'productivity')">Make my team dramatically more productive</button>
+            <button class="q-option" onclick="answer(5, 'costs')">Cut operational costs and manual overhead</button>
+            <button class="q-option" onclick="answer(5, 'revenue')">Launch a new product, service, or revenue stream</button>
+            <button class="q-option" onclick="answer(5, 'all')">All of the above — I want to transform the whole business</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- RESULTS -->
+      <div class="review-results" id="results">
+        <div class="results-header">
+          <h3>Your AI Possibilities</h3>
+          <p>Based on your answers, here's where the biggest opportunities are hiding in your business.</p>
+        </div>
+        <div id="results-opportunities"></div>
+        <div class="results-cta">
+          <h4>Ready to see what's possible?</h4>
+          <p>Book a 30-minute AI Possibilities Call. We'll walk through these opportunities specific to your business — no pitch, no fluff, just a clear picture of what you could build.</p>
+          <a href="#" id="book-call-link">
+            Book Your AI Possibilities Call
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><img src="logo.png" alt="Red Sovereign"></div>
+    <ul class="footer-links">
+      <li><a href="mailto:nick@redsovereign.com">nick@redsovereign.com</a></li>
+      <li><a href="https://linkedin.com/in/nickvossburg" target="_blank">LinkedIn</a></li>
+    </ul>
+    <div class="footer-copy">&copy; 2026 Red Sovereign LLC</div>
+  </div>
+</footer>
+
+<script>
+// ── NAV SCROLL ──
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── FADE IN ON SCROLL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ── AI POSSIBILITIES REVIEW ──
+const answers = {};
+
+function answer(question, value) {
+  answers[question] = value;
+  
+  // Highlight selected
+  const card = document.getElementById('q' + question);
+  card.querySelectorAll('.q-option').forEach(btn => btn.classList.remove('selected'));
+  event.target.classList.add('selected');
+  
+  // Update progress
+  document.getElementById('prog-' + question).classList.add('active');
+  
+  // Advance after brief delay
+  setTimeout(() => {
+    if (question < 5) {
+      card.classList.add('hidden');
+      document.getElementById('q' + (question + 1)).classList.remove('hidden');
+    } else {
+      showResults();
+    }
+  }, 300);
+}
+
+function showResults() {
+  document.getElementById('assessment').style.display = 'none';
+  
+  const results = document.getElementById('results');
+  const opps = document.getElementById('results-opportunities');
+  opps.innerHTML = '';
+  
+  const opportunities = generateOpportunities();
+  
+  opportunities.forEach(opp => {
+    const div = document.createElement('div');
+    div.className = 'result-opportunity';
+    div.innerHTML = `
+      <h4>${opp.title}</h4>
+      <p>${opp.desc}</p>
+      <span class="impact">${opp.impact}</span>
+    `;
+    opps.appendChild(div);
+  });
+  
+  results.classList.add('visible');
+  results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function generateOpportunities() {
+  const opps = [];
+  
+  // Based on AI maturity
+  if (answers[4] === 'none' || answers[4] === 'basic') {
+    opps.push({
+      title: 'Team AI Activation — Immediate Productivity Gains',
+      desc: 'Your team is leaving massive productivity on the table. Advanced AI workflows go far beyond asking a chatbot questions — your people can automate research, draft complex deliverables, analyze data, and manage multi-step processes in a fraction of the time. Most teams see a 2–3× improvement in output within weeks of proper training.',
+      impact: 'High impact · Fast to implement · Low cost'
+    });
+  }
+  
+  // Based on constraint
+  if (answers[3] === 'manual' || answers[3] === 'scale') {
+    opps.push({
+      title: 'Operations Automation — Scale Without Hiring',
+      desc: 'The manual processes eating your margins can be automated with AI agents that handle real work — not just notifications and routing, but actual decision-making, document processing, client communication, and reporting. Every repetitive workflow your team does today is a candidate for automation.',
+      impact: 'High impact · 4–8 weeks to deploy · Immediate ROI'
+    });
+  }
+  
+  if (answers[3] === 'compete') {
+    opps.push({
+      title: 'Competitive AI Advantage — Move Faster Than Your Market',
+      desc: 'While your competitors wait for vendors to ship AI features they\'ll all share, you can build proprietary tools and workflows that create genuine differentiation. Custom AI agents, automated processes, and intelligent systems designed around your specific business model — things no one can buy off the shelf.',
+      impact: 'Strategic advantage · Medium-term payoff · High defensibility'
+    });
+  }
+  
+  // Based on business type
+  if (answers[1] === 'services') {
+    opps.push({
+      title: 'Service Productization — Turn Expertise Into Software',
+      desc: 'You have domain knowledge worth more than hourly billing captures. With development costs near zero, you can build tools, platforms, and AI-powered products that package your expertise for one-to-many delivery. This is how service businesses break free from trading time for money.',
+      impact: 'Revenue transformation · New recurring revenue · 6–12 week build'
+    });
+  }
+  
+  if (answers[1] === 'tech') {
+    opps.push({
+      title: 'AI-Native Product Development — Ship Faster, Build More',
+      desc: 'Your development pipeline can be radically accelerated. AI-powered coding tools let smaller teams ship features that used to require large engineering organizations. The teams that adopt these workflows first are outpacing competitors by 5–10× on development velocity.',
+      impact: 'High impact · Compounds over time · Start in days'
+    });
+  }
+  
+  if (answers[1] === 'trades') {
+    opps.push({
+      title: 'Field Operations Intelligence — Automate the Back Office',
+      desc: 'Operations-heavy businesses drown in scheduling, dispatch, quoting, invoicing, and communication overhead. AI agents can handle the coordination layer — automatically scheduling jobs, generating quotes from templates, following up with clients, and flagging issues before they become problems.',
+      impact: 'High impact · Direct cost savings · 4–6 weeks to deploy'
+    });
+  }
+  
+  // Based on desired change
+  if (answers[5] === 'revenue' || answers[5] === 'all') {
+    opps.push({
+      title: 'New Revenue Streams — Build What Didn\'t Exist Yesterday',
+      desc: 'The collapse in development cost means product ideas that were impossible to justify are now viable. Custom SaaS tools, AI-powered client portals, automated advisory services, data products — the barrier between "idea" and "working product" has never been lower. You can prototype and test in weeks, not quarters.',
+      impact: 'Revenue growth · Medium-term payoff · Asymmetric upside'
+    });
+  }
+  
+  if (answers[5] === 'all') {
+    opps.push({
+      title: 'Full AI Transformation — Become an AI-Native Organization',
+      desc: 'You\'re ready for more than point solutions. A systematic transformation — training your team, automating operations, building custom tools, and establishing internal development capability — compounds over time. Organizations that make this shift don\'t just improve. They become fundamentally different businesses.',
+      impact: 'Transformative · 3–6 month journey · Permanent capability shift'
+    });
+  }
+  
+  // Always include the self-sufficiency angle
+  opps.push({
+    title: 'Build Your Own Development Capability — Permanently',
+    desc: 'Here\'s what most AI consultants won\'t tell you: your business can become its own development shop. With the right training, processes, and governance frameworks, your existing team can build, manage, and continuously improve custom software — without hiring a single developer. We set this up for you, then step back.',
+    impact: 'Strategic capability · No vendor dependency · Long-term compounding'
+  });
+  
+  return opps;
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>

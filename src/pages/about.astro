@@ -1,0 +1,71 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/data/site";
+---
+
+<BaseLayout
+  title="About"
+  description="Meet the founder behind Red Sovereign. 25 years of building, scaling, and exiting companies — now helping businesses become AI-capable."
+>
+  <section class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
+    <div class="max-w-[800px] mx-auto">
+      <div class="section-tag">About</div>
+      <h1
+        class="font-display text-[clamp(2.4rem,5vw,4rem)] font-extrabold leading-[1.1] tracking-tight mb-8"
+      >
+        Built by someone who's been <span class="text-red">in your seat.</span>
+      </h1>
+
+      <div class="font-serif text-[1.15rem] leading-relaxed text-cream-muted space-y-6">
+        <p>
+          Red Sovereign was founded by <strong class="text-cream font-semibold"
+            >{site.founder.name}</strong
+          > — a three-time founder who has built, scaled, and exited companies across
+          hardware, cloud services, and enterprise go-to-market strategy.
+        </p>
+        <p>
+          After 25 years of building businesses, Nick recognized the same
+          pattern he saw with cloud computing in 2010: a fundamental shift that
+          would rewrite the rules of every industry. AI-powered development has
+          collapsed the cost of building software to near zero — and the
+          businesses that figure this out first will have an insurmountable
+          advantage.
+        </p>
+        <p>
+          Red Sovereign exists to help businesses make that shift. Not by
+          selling AI tools or building dependency, but by making organizations
+          genuinely AI-capable — so they can build, automate, and ship on their
+          own.
+        </p>
+      </div>
+
+      <div class="mt-16 grid md:grid-cols-3 gap-6">
+        <div class="p-8 bg-surface border border-cream/[0.06] rounded-sm">
+          <div class="font-display text-[2rem] font-extrabold text-red">3</div>
+          <div class="text-cream-muted text-sm mt-1">Successful exits</div>
+        </div>
+        <div class="p-8 bg-surface border border-cream/[0.06] rounded-sm">
+          <div class="font-display text-[2rem] font-extrabold text-red">
+            $10M+
+          </div>
+          <div class="text-cream-muted text-sm mt-1">Revenue generated</div>
+        </div>
+        <div class="p-8 bg-surface border border-cream/[0.06] rounded-sm">
+          <div class="font-display text-[2rem] font-extrabold text-red">25</div>
+          <div class="text-cream-muted text-sm mt-1">Years in business</div>
+        </div>
+      </div>
+
+      <div class="mt-16 text-center">
+        <a
+          href={site.booking}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-3 bg-red text-cream py-4 px-8 font-display font-bold text-[0.85rem] tracking-[0.06em] uppercase no-underline rounded-sm hover:bg-red-glow hover:shadow-[0_4px_40px_rgba(200,16,46,0.3)] transition-all duration-300"
+        >
+          Book a Conversation
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

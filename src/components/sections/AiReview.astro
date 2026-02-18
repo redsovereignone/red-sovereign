@@ -1,0 +1,346 @@
+---
+import { site } from "@/data/site";
+
+const questions = [
+  {
+    num: 1,
+    text: "What best describes your business?",
+    options: [
+      { value: "services", label: "Professional services or consulting" },
+      { value: "tech", label: "Technology or SaaS company" },
+      {
+        value: "trades",
+        label: "Trades, field services, or operations-heavy",
+      },
+      { value: "other", label: "Other B2B business" },
+    ],
+  },
+  {
+    num: 2,
+    text: "How many people are on your team?",
+    options: [
+      { value: "solo", label: "Just me" },
+      { value: "small", label: "2–10 people" },
+      { value: "mid", label: "11–50 people" },
+      { value: "large", label: "50+ people" },
+    ],
+  },
+  {
+    num: 3,
+    text: "What's the biggest constraint on your growth right now?",
+    options: [
+      {
+        value: "scale",
+        label: "Can't scale without hiring more people",
+      },
+      {
+        value: "manual",
+        label: "Too much manual work eating our margins",
+      },
+      { value: "compete", label: "Competitors are moving faster than us" },
+      {
+        value: "product",
+        label: "We want to launch new offerings but lack dev resources",
+      },
+    ],
+  },
+  {
+    num: 4,
+    text: "Where is your team with AI today?",
+    options: [
+      {
+        value: "none",
+        label: "Barely using it — maybe some ChatGPT here and there",
+      },
+      {
+        value: "basic",
+        label: "Basic use — writing emails, summarizing docs, Q&A",
+      },
+      {
+        value: "moderate",
+        label: "Moderate — some workflows and automations in place",
+      },
+      {
+        value: "advanced",
+        label: "Advanced — building custom tools and agents",
+      },
+    ],
+  },
+  {
+    num: 5,
+    text: "If AI could change one thing about your business this year, what matters most?",
+    options: [
+      {
+        value: "productivity",
+        label: "Make my team dramatically more productive",
+      },
+      {
+        value: "costs",
+        label: "Cut operational costs and manual overhead",
+      },
+      {
+        value: "revenue",
+        label: "Launch a new product, service, or revenue stream",
+      },
+      {
+        value: "all",
+        label: "All of the above — I want to transform the whole business",
+      },
+    ],
+  },
+];
+---
+
+<section
+  id="review"
+  class="bg-surface border-t border-cream/[0.04] py-28 px-10 max-md:py-16 max-md:px-6"
+>
+  <div class="max-w-[1200px] mx-auto">
+    <div class="section-tag" style="justify-content: center;">
+      AI Possibilities Review
+    </div>
+    <h2
+      class="font-display text-[clamp(2rem,4vw,3.2rem)] font-extrabold leading-[1.1] tracking-tight mb-6 text-center"
+    >
+      Discover what AI can <span class="text-red">actually do</span> for your business.
+    </h2>
+
+    <div class="max-w-[720px] mx-auto mt-12">
+      <p
+        class="font-serif text-[1.15rem] text-cream-muted leading-relaxed mb-12 text-center"
+      >
+        Answer five quick questions. We'll show you the specific opportunities
+        most businesses in your position are missing — and what acting on them
+        could look like.
+      </p>
+
+      <!-- Assessment -->
+      <div id="assessment">
+        <!-- Progress bar -->
+        <div class="flex gap-2 mb-12">
+          {
+            [1, 2, 3, 4, 5].map((i) => (
+              <div
+                id={`prog-${i}`}
+                class="flex-1 h-[3px] bg-surface-3 rounded-sm transition-colors duration-[400ms]"
+                data-active="false"
+              />
+            ))
+          }
+        </div>
+
+        <!-- Questions -->
+        {
+          questions.map((q, idx) => (
+            <div
+              id={`q${q.num}`}
+              class:list={[
+                "min-h-[320px] flex flex-col",
+                { hidden: idx > 0 },
+              ]}
+            >
+              <div class="font-display text-[0.65rem] font-bold tracking-[0.2em] uppercase text-red mb-4">
+                Question {String(q.num).padStart(2, "0")} of 05
+              </div>
+              <div class="font-display text-2xl font-bold leading-tight mb-8">
+                {q.text}
+              </div>
+              <div class="grid gap-3">
+                {q.options.map((opt) => (
+                  <button
+                    class="review-option w-full p-4 px-6 bg-surface-2 border border-cream/[0.06] rounded-sm text-cream font-body text-[0.95rem] text-left cursor-pointer hover:border-red hover:bg-surface-3 transition-all duration-200"
+                    data-question={q.num}
+                    data-value={opt.value}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Results -->
+      <div id="results" class="hidden">
+        <div class="text-center mb-12">
+          <h3 class="font-display text-[2rem] font-extrabold mb-3">
+            Your AI Possibilities
+          </h3>
+          <p class="font-serif text-cream-muted text-[1.1rem]">
+            Based on your answers, here's where the biggest opportunities are
+            hiding in your business.
+          </p>
+        </div>
+        <div id="results-opportunities"></div>
+        <div
+          class="text-center mt-12 p-12 border border-red/20 rounded-sm bg-red/[0.03]"
+        >
+          <h4 class="font-display text-[1.3rem] font-bold mb-3">
+            Ready to see what's possible?
+          </h4>
+          <p class="text-cream-muted text-[0.95rem] mb-8">
+            Book a 30-minute AI Possibilities Call. We'll walk through these
+            opportunities specific to your business — no pitch, no fluff, just a
+            clear picture of what you could build.
+          </p>
+          <a
+            href={site.booking}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 bg-red text-cream py-4 px-10 font-display font-bold text-[0.85rem] tracking-[0.06em] uppercase no-underline rounded-sm hover:bg-red-glow hover:shadow-[0_4px_40px_rgba(200,16,46,0.3)] transition-all duration-300"
+          >
+            Book Your AI Possibilities Call
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const answers: Record<number, string> = {};
+
+  document.querySelectorAll(".review-option").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const question = Number(btn.getAttribute("data-question"));
+      const value = btn.getAttribute("data-value") || "";
+      answers[question] = value;
+
+      // Highlight selected
+      const card = document.getElementById(`q${question}`);
+      card
+        ?.querySelectorAll(".review-option")
+        .forEach((b) =>
+          b.classList.remove("!border-red", "!bg-red/[0.08]")
+        );
+      btn.classList.add("!border-red", "!bg-red/[0.08]");
+
+      // Update progress
+      const prog = document.getElementById(`prog-${question}`);
+      if (prog) prog.classList.add("!bg-red");
+
+      setTimeout(() => {
+        if (question < 5) {
+          card?.classList.add("hidden");
+          document.getElementById(`q${question + 1}`)?.classList.remove("hidden");
+        } else {
+          showResults();
+        }
+      }, 300);
+    });
+  });
+
+  function showResults() {
+    document.getElementById("assessment")!.style.display = "none";
+    const results = document.getElementById("results")!;
+    const opps = document.getElementById("results-opportunities")!;
+    opps.innerHTML = "";
+
+    const opportunities = generateOpportunities();
+    opportunities.forEach((opp) => {
+      const div = document.createElement("div");
+      div.className =
+        "p-8 bg-surface-2 border-l-2 border-red mb-5 rounded-r-sm";
+      div.innerHTML = `
+        <h4 class="font-display font-bold text-base mb-2">${opp.title}</h4>
+        <p class="text-cream-muted text-[0.95rem] leading-relaxed">${opp.desc}</p>
+        <span class="inline-block mt-3 font-display text-[0.7rem] font-bold tracking-[0.15em] uppercase text-red">${opp.impact}</span>
+      `;
+      opps.appendChild(div);
+    });
+
+    results.classList.remove("hidden");
+    results.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function generateOpportunities() {
+    const opps: { title: string; desc: string; impact: string }[] = [];
+
+    if (answers[4] === "none" || answers[4] === "basic") {
+      opps.push({
+        title: "Team AI Activation — Immediate Productivity Gains",
+        desc: "Your team is leaving massive productivity on the table. Advanced AI workflows go far beyond asking a chatbot questions — your people can automate research, draft complex deliverables, analyze data, and manage multi-step processes in a fraction of the time. Most teams see a 2\u20133\u00d7 improvement in output within weeks of proper training.",
+        impact: "High impact \u00b7 Fast to implement \u00b7 Low cost",
+      });
+    }
+
+    if (answers[3] === "manual" || answers[3] === "scale") {
+      opps.push({
+        title: "Operations Automation — Scale Without Hiring",
+        desc: "The manual processes eating your margins can be automated with AI agents that handle real work \u2014 not just notifications and routing, but actual decision-making, document processing, client communication, and reporting. Every repetitive workflow your team does today is a candidate for automation.",
+        impact: "High impact \u00b7 4\u20138 weeks to deploy \u00b7 Immediate ROI",
+      });
+    }
+
+    if (answers[3] === "compete") {
+      opps.push({
+        title: "Competitive AI Advantage — Move Faster Than Your Market",
+        desc: "While your competitors wait for vendors to ship AI features they'll all share, you can build proprietary tools and workflows that create genuine differentiation. Custom AI agents, automated processes, and intelligent systems designed around your specific business model \u2014 things no one can buy off the shelf.",
+        impact: "Strategic advantage \u00b7 Medium-term payoff \u00b7 High defensibility",
+      });
+    }
+
+    if (answers[1] === "services") {
+      opps.push({
+        title: "Service Productization — Turn Expertise Into Software",
+        desc: "You have domain knowledge worth more than hourly billing captures. With development costs near zero, you can build tools, platforms, and AI-powered products that package your expertise for one-to-many delivery. This is how service businesses break free from trading time for money.",
+        impact: "Revenue transformation \u00b7 New recurring revenue \u00b7 6\u201312 week build",
+      });
+    }
+
+    if (answers[1] === "tech") {
+      opps.push({
+        title: "AI-Native Product Development — Ship Faster, Build More",
+        desc: "Your development pipeline can be radically accelerated. AI-powered coding tools let smaller teams ship features that used to require large engineering organizations. The teams that adopt these workflows first are outpacing competitors by 5\u201310\u00d7 on development velocity.",
+        impact: "High impact \u00b7 Compounds over time \u00b7 Start in days",
+      });
+    }
+
+    if (answers[1] === "trades") {
+      opps.push({
+        title: "Field Operations Intelligence — Automate the Back Office",
+        desc: "Operations-heavy businesses drown in scheduling, dispatch, quoting, invoicing, and communication overhead. AI agents can handle the coordination layer \u2014 automatically scheduling jobs, generating quotes from templates, following up with clients, and flagging issues before they become problems.",
+        impact: "High impact \u00b7 Direct cost savings \u00b7 4\u20136 weeks to deploy",
+      });
+    }
+
+    if (answers[5] === "revenue" || answers[5] === "all") {
+      opps.push({
+        title: "New Revenue Streams — Build What Didn't Exist Yesterday",
+        desc: "The collapse in development cost means product ideas that were impossible to justify are now viable. Custom SaaS tools, AI-powered client portals, automated advisory services, data products \u2014 the barrier between \u201cidea\u201d and \u201cworking product\u201d has never been lower. You can prototype and test in weeks, not quarters.",
+        impact: "Revenue growth \u00b7 Medium-term payoff \u00b7 Asymmetric upside",
+      });
+    }
+
+    if (answers[5] === "all") {
+      opps.push({
+        title: "Full AI Transformation — Become an AI-Native Organization",
+        desc: "You're ready for more than point solutions. A systematic transformation \u2014 training your team, automating operations, building custom tools, and establishing internal development capability \u2014 compounds over time. Organizations that make this shift don't just improve. They become fundamentally different businesses.",
+        impact: "Transformative \u00b7 3\u20136 month journey \u00b7 Permanent capability shift",
+      });
+    }
+
+    opps.push({
+      title: "Build Your Own Development Capability — Permanently",
+      desc: "Here's what most AI consultants won't tell you: your business can become its own development shop. With the right training, processes, and governance frameworks, your existing team can build, manage, and continuously improve custom software \u2014 without hiring a single developer. We set this up for you, then step back.",
+      impact: "Strategic capability \u00b7 No vendor dependency \u00b7 Long-term compounding",
+    });
+
+    return opps;
+  }
+</script>

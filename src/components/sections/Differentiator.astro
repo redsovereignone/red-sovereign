@@ -1,0 +1,63 @@
+---
+const stats = [
+  { number: "25", label: "Years building and scaling companies" },
+  { number: "3", label: "Companies built and successfully exited" },
+  { number: "$10M+", label: "Revenue generated through go-to-market strategy" },
+  { number: "100%", label: "AI-native — we build with what we teach" },
+];
+---
+
+<section
+  id="difference"
+  class="bg-surface border-y border-cream/[0.04] py-28 px-10 max-md:py-16 max-md:px-6"
+>
+  <div class="max-w-[1200px] mx-auto fade-in">
+    <div class="section-tag">Why Red Sovereign</div>
+    <h2
+      class="font-display text-[clamp(2rem,4vw,3.2rem)] font-extrabold leading-[1.1] tracking-tight mb-6"
+    >
+      Built by a founder. <span class="text-red">For founders.</span>
+    </h2>
+
+    <div
+      class="grid md:grid-cols-2 gap-16 max-md:gap-10 items-start mt-12"
+    >
+      <div class="font-serif text-[1.15rem] leading-relaxed text-cream-muted space-y-6">
+        <p>
+          Most AI consultants sell theory. Most dev shops want you dependent on
+          them. We're different because we've done this — <strong
+            class="text-cream font-semibold"
+            >built three companies from scratch, scaled them, and sold them.</strong
+          > We understand what it takes to grow a business because we've had to make
+          the same decisions you face.
+        </p>
+        <p>
+          We don't hand you a strategy deck and disappear. We build the first
+          version with you, train your team to own it, and set up the guardrails
+          so you don't need us anymore. <strong class="text-cream font-semibold"
+            >Our success means your independence.</strong
+          >
+        </p>
+        <p>
+          And we practice what we preach — our own operations run on the same
+          AI-native systems we build for clients.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        {
+          stats.map((stat) => (
+            <div class="p-8 bg-surface-2 border border-cream/[0.04] rounded-sm">
+              <div class="font-display text-[2.5rem] font-extrabold text-red leading-none">
+                {stat.number}
+              </div>
+              <div class="text-[0.85rem] text-cream-muted mt-2 leading-snug">
+                {stat.label}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

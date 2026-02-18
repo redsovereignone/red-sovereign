@@ -1,0 +1,83 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/data/site";
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description="Red Sovereign's terms of service for website usage and service engagements."
+>
+  <section class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
+    <div class="max-w-[800px] mx-auto">
+      <h1
+        class="font-display text-[clamp(2rem,4vw,3rem)] font-extrabold leading-[1.1] tracking-tight mb-12"
+      >
+        Terms of Service
+      </h1>
+
+      <div class="text-cream-muted text-[0.95rem] leading-relaxed space-y-8">
+        <p>
+          <strong class="text-cream">Last updated:</strong> February 2026
+        </p>
+
+        <div>
+          <h2 class="font-display text-xl font-bold text-cream mb-3">
+            Agreement to Terms
+          </h2>
+          <p>
+            By accessing redsovereign.com, you agree to these terms of service.
+            If you do not agree, please do not use the site.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-display text-xl font-bold text-cream mb-3">
+            Services
+          </h2>
+          <p>
+            Red Sovereign provides AI strategy consulting, team training,
+            operations automation, and custom software development services.
+            Specific deliverables, timelines, and pricing are defined in
+            individual service agreements.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-display text-xl font-bold text-cream mb-3">
+            Intellectual Property
+          </h2>
+          <p>
+            Custom software and systems built during client engagements are
+            owned by the client. Red Sovereign retains rights to its proprietary
+            methodologies, frameworks, and training materials.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-display text-xl font-bold text-cream mb-3">
+            Limitation of Liability
+          </h2>
+          <p>
+            Red Sovereign provides services on an as-is basis. We are not liable
+            for indirect, incidental, or consequential damages arising from the
+            use of our services or website.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-display text-xl font-bold text-cream mb-3">
+            Contact
+          </h2>
+          <p>
+            Questions about these terms? Email
+            <a
+              href={`mailto:${site.email}`}
+              class="text-red hover:text-red-glow transition-colors"
+              >{site.email}</a
+            >.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

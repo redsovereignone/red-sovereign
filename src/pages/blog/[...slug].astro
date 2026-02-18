@@ -1,0 +1,66 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  ogType="article"
+>
+  <article class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
+    <div class="max-w-[720px] mx-auto">
+      <a
+        href="/blog"
+        class="text-cream-dim text-[0.8rem] font-display tracking-[0.1em] uppercase hover:text-cream transition-colors no-underline"
+      >
+        &larr; Back to Blog
+      </a>
+
+      <header class="mt-8 mb-12">
+        <time
+          class="text-cream-dim text-[0.8rem] font-display tracking-[0.1em] uppercase"
+        >
+          {
+            post.data.pubDate.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
+        </time>
+        <h1
+          class="font-display text-[clamp(2rem,4vw,3rem)] font-extrabold leading-[1.1] tracking-tight mt-4"
+        >
+          {post.data.title}
+        </h1>
+        <p class="font-serif text-cream-muted text-[1.15rem] mt-4">
+          {post.data.description}
+        </p>
+      </header>
+
+      <div
+        class="prose prose-invert prose-lg max-w-none
+          prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight
+          prose-p:text-cream-muted prose-p:leading-relaxed
+          prose-a:text-red prose-a:no-underline hover:prose-a:text-red-glow
+          prose-strong:text-cream prose-strong:font-semibold
+          prose-blockquote:border-red prose-blockquote:text-cream-muted
+          prose-code:text-red prose-code:bg-surface-2 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-sm"
+      >
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

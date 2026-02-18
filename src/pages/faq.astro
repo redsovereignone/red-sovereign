@@ -1,0 +1,99 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import JsonLd from "@/components/astro/JsonLd.astro";
+import { faqSchema } from "@/lib/schemas";
+import { site } from "@/data/site";
+
+const faqs = [
+  {
+    question: "What exactly does Red Sovereign do?",
+    answer:
+      "We make businesses AI-capable. That means training your team to use advanced AI tools productively, automating your operations with AI agents, building custom software and products using AI-powered development, and setting up the processes for your organization to keep building on its own.",
+  },
+  {
+    question: "Do we need a development team to work with you?",
+    answer:
+      "No. That's the whole point. AI-powered development has collapsed the cost of building software to near zero. We build the first version alongside your team, then train them to manage, maintain, and extend it — without hiring developers.",
+  },
+  {
+    question: "How is this different from hiring an AI consultant?",
+    answer:
+      "Most AI consultants sell strategy decks and leave. We build working systems, transfer the capability to your team, and design our engagements so you don't need us anymore. Our success means your independence.",
+  },
+  {
+    question: "What size companies do you work with?",
+    answer:
+      "We work primarily with B2B companies from solo founders to teams of 50+. The sweet spot is businesses that have hit a growth ceiling and recognize that AI can break through it — but don't know where to start.",
+  },
+  {
+    question: "How long does a typical engagement last?",
+    answer:
+      "It depends on the scope. AI Activation (team training) takes about 2 weeks. Operations automation runs 4–8 weeks. Custom software builds are typically 8–12 weeks. Many clients start with Activate and expand from there.",
+  },
+  {
+    question: "What's the AI Possibilities Review?",
+    answer:
+      "It's a free 30-minute call where we walk through the specific opportunities AI creates for your business. No pitch, no fluff — just a clear picture of what you could build and what the impact would be.",
+  },
+  {
+    question: "Do you build the software, or do we?",
+    answer:
+      "Both. We build the first version alongside your team so they learn by doing. Then we set up the governance, processes, and tooling so your team can continue building independently. The goal is permanent capability, not a vendor relationship.",
+  },
+  {
+    question: "What industries do you work with?",
+    answer:
+      "We work across B2B industries — professional services, technology companies, field services, and operations-heavy businesses. If your business has manual processes, knowledge-heavy workflows, or growth constraints that AI could solve, we can help.",
+  },
+];
+---
+
+<BaseLayout
+  title="FAQ"
+  description="Frequently asked questions about Red Sovereign's AI strategy, automation, and custom software services."
+>
+  <JsonLd schema={faqSchema(faqs)} />
+
+  <section class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
+    <div class="max-w-[800px] mx-auto">
+      <div class="section-tag" style="justify-content: center;">FAQ</div>
+      <h1
+        class="font-display text-[clamp(2.4rem,5vw,4rem)] font-extrabold leading-[1.1] tracking-tight mb-16 text-center"
+      >
+        Questions we get <span class="text-red">asked a lot.</span>
+      </h1>
+
+      <div class="space-y-6">
+        {
+          faqs.map((faq) => (
+            <details class="group border border-cream/[0.06] rounded-sm bg-surface overflow-hidden">
+              <summary class="flex items-center justify-between p-8 cursor-pointer font-display font-bold text-[1.05rem] leading-snug hover:text-red transition-colors duration-300 list-none [&::-webkit-details-marker]:hidden">
+                {faq.question}
+                <span class="text-cream-dim ml-4 shrink-0 group-open:rotate-45 transition-transform duration-300 text-xl">
+                  +
+                </span>
+              </summary>
+              <div class="px-8 pb-8 -mt-2">
+                <p class="text-cream-muted text-[0.95rem] leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            </details>
+          ))
+        }
+      </div>
+
+      <div class="mt-16 text-center">
+        <p class="text-cream-muted mb-6">Still have questions?</p>
+        <a
+          href={site.booking}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-3 bg-red text-cream py-4 px-8 font-display font-bold text-[0.85rem] tracking-[0.06em] uppercase no-underline rounded-sm hover:bg-red-glow hover:shadow-[0_4px_40px_rgba(200,16,46,0.3)] transition-all duration-300"
+        >
+          Book a Conversation
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

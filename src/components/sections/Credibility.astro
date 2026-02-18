@@ -1,0 +1,43 @@
+---
+const credentials = [
+  {
+    title: "FrozenCPU → Built & Sold",
+    description:
+      "Built a leading PC hardware company from the ground up. Designed the product, the operations, the customer experience — then executed a successful exit.",
+  },
+  {
+    title: "CloudBearing → $4M Exit",
+    description:
+      "Identified the cloud migration wave early. Built a services company around it, scaled it, and sold it for $4M — in a market that didn't exist five years prior.",
+  },
+  {
+    title: "Microsoft Azure GTM",
+    description:
+      "Led go-to-market strategy generating over $10M in revenue. Enterprise-scale execution with startup-speed decision making.",
+  },
+];
+---
+
+<section class="py-28 px-10 max-md:py-16 max-md:px-6">
+  <div class="max-w-[1200px] mx-auto fade-in">
+    <div class="section-tag">Track Record</div>
+    <h2
+      class="font-display text-[clamp(2rem,4vw,3.2rem)] font-extrabold leading-[1.1] tracking-tight mb-6"
+    >
+      We've been on <span class="text-red">your side</span> of the table.
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-8 max-md:grid-cols-1 mt-12">
+      {
+        credentials.map((cred) => (
+          <div class="p-8 border border-cream/[0.06] rounded-sm hover:border-red/30 transition-colors duration-300">
+            <h4 class="font-display font-bold text-base mb-3">{cred.title}</h4>
+            <p class="text-cream-muted text-[0.9rem] leading-relaxed">
+              {cred.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

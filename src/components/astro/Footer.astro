@@ -1,0 +1,38 @@
+---
+import { site } from "@/data/site";
+---
+
+<footer class="py-16 px-10 border-t border-cream/[0.04]">
+  <div
+    class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
+  >
+    <a href="/">
+      <img src="/logo.png" alt={site.name} class="h-7 w-auto" />
+    </a>
+
+    <ul class="flex gap-8 list-none">
+      <li>
+        <a
+          href={`mailto:${site.email}`}
+          class="text-cream-dim text-[0.85rem] no-underline hover:text-cream transition-colors duration-300"
+        >
+          {site.email}
+        </a>
+      </li>
+      <li>
+        <a
+          href={site.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-cream-dim text-[0.85rem] no-underline hover:text-cream transition-colors duration-300"
+        >
+          LinkedIn
+        </a>
+      </li>
+    </ul>
+
+    <div class="text-cream-dim text-[0.8rem]">
+      &copy; {new Date().getFullYear()} Red Sovereign LLC
+    </div>
+  </div>
+</footer>

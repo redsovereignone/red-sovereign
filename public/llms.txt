@@ -1,0 +1,26 @@
+# Red Sovereign
+
+> AI Strategy & Transformation — helping businesses become AI-capable organizations.
+
+Red Sovereign helps businesses train their teams, automate operations, build custom software, and establish permanent AI development capability — without hiring developers or becoming dependent on vendors.
+
+## Services
+
+- **Activate**: AI productivity training that makes your team 2–3× more productive
+- **Automate**: Operations audit and AI agent development to scale without hiring
+- **Build**: Custom software and AI products built with AI-powered development
+- **Operate**: Governance, processes, and capability transfer for permanent self-sufficiency
+
+## Key Pages
+
+- [Home](https://redsovereign.com/)
+- [About](https://redsovereign.com/about)
+- [Pricing](https://redsovereign.com/pricing)
+- [FAQ](https://redsovereign.com/faq)
+- [Full LLM Content](https://redsovereign.com/llms-full.txt)
+
+## Contact
+
+- Email: nick@redsovereign.com
+- LinkedIn: https://linkedin.com/in/nickvossburg
+- Booking: https://app.reclaim.ai/m/redsovereign

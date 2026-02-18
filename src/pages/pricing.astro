@@ -1,0 +1,122 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/data/site";
+
+const tiers = [
+  {
+    name: "Activate",
+    price: "Starting at $5K",
+    description: "AI productivity training for your team",
+    features: [
+      "Advanced AI workflow training",
+      "Tool setup and configuration",
+      "Team-specific use case development",
+      "2–3× productivity improvement",
+      "2-week engagement",
+    ],
+  },
+  {
+    name: "Automate",
+    price: "Starting at $10K",
+    description: "Operations audit and AI automation",
+    features: [
+      "Full operations audit",
+      "AI agent development",
+      "Workflow automation",
+      "Measurable ROI within 30 days",
+      "4–8 week engagement",
+    ],
+    featured: true,
+  },
+  {
+    name: "Build",
+    price: "Starting at $25K",
+    description: "Custom software and AI products",
+    features: [
+      "Custom software development",
+      "AI agent and product builds",
+      "Team capability transfer",
+      "Governance frameworks",
+      "8–12 week engagement",
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Pricing"
+  description="Transparent pricing for AI strategy, automation, and custom software development. From team training to full business transformation."
+>
+  <section class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="section-tag" style="justify-content: center;">Pricing</div>
+      <h1
+        class="font-display text-[clamp(2.4rem,5vw,4rem)] font-extrabold leading-[1.1] tracking-tight mb-6 text-center"
+      >
+        Invest in <span class="text-red">capability</span>, not dependency.
+      </h1>
+      <p
+        class="font-serif text-[1.15rem] text-cream-muted leading-relaxed max-w-[620px] mx-auto text-center mb-16"
+      >
+        Every engagement is designed to make you self-sufficient. You own the
+        systems, the knowledge, and the capability when we're done.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {
+          tiers.map((tier) => (
+            <div
+              class:list={[
+                "p-10 rounded-sm border flex flex-col",
+                tier.featured
+                  ? "border-red/30 bg-red/[0.03]"
+                  : "border-cream/[0.06] bg-surface",
+              ]}
+            >
+              <div class="font-display text-[0.7rem] font-bold tracking-[0.2em] uppercase text-red mb-2">
+                {tier.name}
+              </div>
+              <div class="font-display text-[1.8rem] font-extrabold mb-2">
+                {tier.price}
+              </div>
+              <p class="text-cream-muted text-[0.95rem] mb-8">
+                {tier.description}
+              </p>
+              <ul class="space-y-3 mb-10 flex-1">
+                {tier.features.map((feature) => (
+                  <li class="flex items-start gap-3 text-[0.9rem] text-cream-muted">
+                    <span class="text-red mt-0.5 shrink-0">&#10003;</span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={site.booking}
+                target="_blank"
+                rel="noopener noreferrer"
+                class:list={[
+                  "inline-flex items-center justify-center py-3.5 px-6 font-display font-bold text-[0.8rem] tracking-[0.06em] uppercase no-underline rounded-sm transition-all duration-300",
+                  tier.featured
+                    ? "bg-red text-cream hover:bg-red-glow hover:shadow-[0_4px_40px_rgba(200,16,46,0.3)]"
+                    : "border border-cream/[0.12] text-cream hover:border-red/50",
+                ]}
+              >
+                Book a Call
+              </a>
+            </div>
+          ))
+        }
+      </div>
+
+      <p
+        class="text-center text-cream-dim text-sm mt-10 max-w-[500px] mx-auto"
+      >
+        All engagements include capability transfer. Need a custom scope?
+        <a
+          href={`mailto:${site.email}`}
+          class="text-red hover:text-red-glow transition-colors">Let's talk.</a
+        >
+      </p>
+    </div>
+  </section>
+</BaseLayout>

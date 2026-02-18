@@ -1,0 +1,62 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Blog"
+  description="Insights on AI strategy, automation, and building AI-capable organizations from Red Sovereign."
+>
+  <section class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
+    <div class="max-w-[800px] mx-auto">
+      <div class="section-tag">Blog</div>
+      <h1
+        class="font-display text-[clamp(2.4rem,5vw,4rem)] font-extrabold leading-[1.1] tracking-tight mb-16"
+      >
+        Thinking out <span class="text-red">loud.</span>
+      </h1>
+
+      {
+        posts.length > 0 ? (
+          <div class="space-y-8">
+            {posts.map((post) => (
+              <a
+                href={`/blog/${post.id}`}
+                class="block p-8 border border-cream/[0.06] rounded-sm bg-surface hover:border-red/30 transition-colors duration-300 no-underline"
+              >
+                <time class="text-cream-dim text-[0.8rem] font-display tracking-[0.1em] uppercase">
+                  {post.data.pubDate.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+                <h2 class="font-display text-xl font-bold mt-2 mb-2 text-cream">
+                  {post.data.title}
+                </h2>
+                <p class="text-cream-muted text-[0.95rem]">
+                  {post.data.description}
+                </p>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="text-cream-muted font-serif text-lg">
+            Posts coming soon. In the meantime,{" "}
+            <a
+              href="/#review"
+              class="text-red hover:text-red-glow transition-colors"
+            >
+              take the AI Possibilities Review
+            </a>{" "}
+            to see what AI can do for your business.
+          </p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

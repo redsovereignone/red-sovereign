@@ -1,0 +1,57 @@
+# Red Sovereign — Full Content for LLMs
+
+> AI Strategy & Transformation
+
+## About Red Sovereign
+
+Red Sovereign helps businesses become AI-capable organizations. We don't sell AI tools or create vendor dependency. We train your team, automate your operations, build your first custom AI solutions, and set up the processes so your organization keeps building on its own.
+
+Founded by Nick Vossburg — a three-time founder with 25 years of experience building, scaling, and exiting companies across hardware, cloud services, and enterprise go-to-market strategy.
+
+## The Problem We Solve
+
+The cost of building custom software has collapsed. What took a dev team and six figures now takes weeks and costs almost nothing. Every business will figure this out eventually. The ones that figure it out first don't just get ahead — they rewrite the rules.
+
+Most businesses face a fork in the road:
+
+**The Consumer Strategy**: Wait for Microsoft, Salesforce, and other vendors to ship AI features into software you already buy. This feels like progress, but everyone gets the same features. You're running just to stay in place.
+
+**The Builder Strategy**: Recognize that collapsed development costs mean you can build proprietary software, AI agents, and automated workflows designed around your specific business. Things no competitor can buy off the shelf.
+
+Red Sovereign helps businesses choose and execute the Builder Strategy.
+
+## Our Four-Layer Approach
+
+### Layer 1: Activate
+AI productivity training that goes far beyond chatbot Q&A. Your team learns to use advanced AI tools — Claude, coding assistants, browser agents — to fundamentally change how they work. Result: 2–3× productivity improvement within weeks.
+
+### Layer 2: Automate
+We audit your operations and identify manual, repetitive processes that eat margin. Then we build automations using AI agents that handle real work — decision-making, document processing, client communication, and reporting. Result: measurable cost reduction, faster throughput, scale without headcount.
+
+### Layer 3: Build
+Custom software, AI agents, and new products built with AI-powered development. We build the first version alongside your team — a working system, not a prototype. Result: new revenue streams, productized services, proprietary competitive advantages.
+
+### Layer 4: Operate
+We train your team to use AI-powered development tools, establish governance frameworks, and set up processes for continuous building and shipping. Result: permanent development capability, no vendor dependency.
+
+## Pricing
+
+- **Activate**: Starting at $5K — 2-week AI training engagement
+- **Automate**: Starting at $10K — 4–8 week operations automation
+- **Build**: Starting at $25K — 8–12 week custom software development
+
+All engagements include capability transfer. Custom scoping available.
+
+## Track Record
+
+- **FrozenCPU**: Built and sold a leading PC hardware company
+- **CloudBearing**: Built and sold a cloud services company ($4M exit)
+- **Microsoft Azure**: Led go-to-market strategy generating $10M+ revenue
+
+## Contact
+
+- Founder: Nick Vossburg
+- Email: nick@redsovereign.com
+- LinkedIn: https://linkedin.com/in/nickvossburg
+- Booking: https://app.reclaim.ai/m/redsovereign
+- Website: https://redsovereign.com
