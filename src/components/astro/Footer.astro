@@ -1,38 +1,119 @@
 ---
-import { site } from "@/data/site";
+import { site, navLinks } from "@/data/site";
+
+const year = new Date().getFullYear();
+
+const quickLinks = [
+  ...navLinks,
+  { label: "Pricing", href: "/pricing" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Blog", href: "/blog" },
+];
+
+const connectLinks = [
+  { label: site.email, href: `mailto:${site.email}` },
+  { label: "LinkedIn", href: site.linkedin, external: true },
+  { label: "Book a Call", href: site.booking, external: true },
+];
+
+const legalLinks = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
+];
 ---
 
-<footer class="py-16 px-10 border-t border-cream/[0.04]">
-  <div
-    class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
-  >
-    <a href="/">
-      <img src="/logo.png" alt={site.name} class="h-7 w-auto" />
-    </a>
-
-    <ul class="flex gap-8 list-none">
-      <li>
-        <a
-          href={`mailto:${site.email}`}
-          class="text-cream-dim text-[0.85rem] no-underline hover:text-cream transition-colors duration-300"
-        >
-          {site.email}
+<footer class="border-t border-red/20 py-20 px-10 max-md:py-12 max-md:px-6">
+  <div class="max-w-[1200px] mx-auto">
+    <div class="grid md:grid-cols-4 gap-12 max-md:gap-8">
+      <!-- Column 1: Brand -->
+      <div>
+        <a href="/">
+          <img src="/logo.png" alt={site.name} class="h-7 w-auto" />
         </a>
-      </li>
-      <li>
-        <a
-          href={site.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-cream-dim text-[0.85rem] no-underline hover:text-cream transition-colors duration-300"
-        >
-          LinkedIn
-        </a>
-      </li>
-    </ul>
+        <p class="text-cream-dim text-sm leading-relaxed mt-4 max-w-[250px]">
+          AI Strategy &amp; Transformation for businesses ready to lead, not
+          follow.
+        </p>
+      </div>
 
-    <div class="text-cream-dim text-[0.8rem]">
-      &copy; {new Date().getFullYear()} Red Sovereign LLC
+      <!-- Column 2: Quick Links -->
+      <div>
+        <h4
+          class="text-cream-dim text-xs font-medium uppercase tracking-[0.1em] mb-4"
+        >
+          Navigate
+        </h4>
+        <ul class="list-none flex flex-col gap-3">
+          {
+            quickLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-cream-muted text-sm no-underline hover:text-cream transition-colors duration-300"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Column 3: Connect -->
+      <div>
+        <h4
+          class="text-cream-dim text-xs font-medium uppercase tracking-[0.1em] mb-4"
+        >
+          Connect
+        </h4>
+        <ul class="list-none flex flex-col gap-3">
+          {
+            connectLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  class="text-cream-muted text-sm no-underline hover:text-cream transition-colors duration-300"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Column 4: Legal -->
+      <div>
+        <h4
+          class="text-cream-dim text-xs font-medium uppercase tracking-[0.1em] mb-4"
+        >
+          Legal
+        </h4>
+        <ul class="list-none flex flex-col gap-3">
+          {
+            legalLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-cream-muted text-sm no-underline hover:text-cream transition-colors duration-300"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
+
+    <!-- Divider -->
+    <div class="h-px bg-cream/[0.06] mt-12 mb-6"></div>
+
+    <!-- Copyright -->
+    <p class="text-cream-dim text-xs text-center">
+      &copy; {year} Red Sovereign LLC. All rights reserved.
+    </p>
   </div>
 </footer>

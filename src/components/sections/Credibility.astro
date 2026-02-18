@@ -2,16 +2,22 @@
 const credentials = [
   {
     title: "FrozenCPU → Built & Sold",
+    icon: "monitor",
+    badge: "Built & Exited",
     description:
       "Built a leading PC hardware company from the ground up. Designed the product, the operations, the customer experience — then executed a successful exit.",
   },
   {
     title: "CloudBearing → $4M Exit",
+    icon: "cloud",
+    badge: "$4M Exit",
     description:
       "Identified the cloud migration wave early. Built a services company around it, scaled it, and sold it for $4M — in a market that didn't exist five years prior.",
   },
   {
     title: "Microsoft Azure GTM",
+    icon: "building",
+    badge: "$10M+ Revenue",
     description:
       "Led go-to-market strategy generating over $10M in revenue. Enterprise-scale execution with startup-speed decision making.",
   },
@@ -31,7 +37,39 @@ const credentials = [
       {
         credentials.map((cred) => (
           <div class="p-8 border border-cream/[0.06] rounded-sm hover:border-red/30 transition-colors duration-300">
-            <h4 class="font-display font-bold text-base mb-3">{cred.title}</h4>
+            <div class="w-12 h-12 rounded-full bg-surface-2 flex items-center justify-center mb-4">
+              {cred.icon === "monitor" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red">
+                  <rect width="20" height="14" x="2" y="3" rx="2"/>
+                  <line x1="8" x2="16" y1="21" y2="21"/>
+                  <line x1="12" x2="12" y1="17" y2="21"/>
+                </svg>
+              )}
+              {cred.icon === "cloud" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red">
+                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+                </svg>
+              )}
+              {cred.icon === "building" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red">
+                  <rect width="16" height="20" x="4" y="2" rx="2" ry="2"/>
+                  <path d="M9 22v-4h6v4"/>
+                  <path d="M8 6h.01"/>
+                  <path d="M16 6h.01"/>
+                  <path d="M12 6h.01"/>
+                  <path d="M12 10h.01"/>
+                  <path d="M12 14h.01"/>
+                  <path d="M16 10h.01"/>
+                  <path d="M16 14h.01"/>
+                  <path d="M8 10h.01"/>
+                  <path d="M8 14h.01"/>
+                </svg>
+              )}
+            </div>
+            <h4 class="font-display font-bold text-base">{cred.title}</h4>
+            <span class="inline-block mt-2 mb-3 px-3 py-1 text-[0.7rem] font-display font-bold tracking-[0.1em] uppercase bg-red/10 text-red rounded-sm">
+              {cred.badge}
+            </span>
             <p class="text-cream-muted text-[0.9rem] leading-relaxed">
               {cred.description}
             </p>

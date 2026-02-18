@@ -1,5 +1,6 @@
 ---
 import { site, navLinks } from "@/data/site";
+import MobileMenu from "@/components/react/MobileMenu.tsx";
 ---
 
 <nav
@@ -31,6 +32,8 @@ import { site, navLinks } from "@/data/site";
       </a>
     </li>
   </ul>
+
+  <MobileMenu client:load />
 </nav>
 
 <script>

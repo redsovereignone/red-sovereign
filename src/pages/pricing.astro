@@ -5,6 +5,7 @@ import { site } from "@/data/site";
 const tiers = [
   {
     name: "Activate",
+    icon: "graduation-cap",
     price: "Starting at $5K",
     description: "AI productivity training for your team",
     features: [
@@ -17,6 +18,7 @@ const tiers = [
   },
   {
     name: "Automate",
+    icon: "workflow",
     price: "Starting at $10K",
     description: "Operations audit and AI automation",
     features: [
@@ -30,6 +32,7 @@ const tiers = [
   },
   {
     name: "Build",
+    icon: "code-2",
     price: "Starting at $25K",
     description: "Custom software and AI products",
     features: [
@@ -69,10 +72,38 @@ const tiers = [
               class:list={[
                 "p-10 rounded-sm border flex flex-col",
                 tier.featured
-                  ? "border-red/30 bg-red/[0.03]"
+                  ? "border-red/30 bg-red/[0.05] shadow-[0_0_40px_rgba(200,16,46,0.06)]"
                   : "border-cream/[0.06] bg-surface",
               ]}
             >
+              {tier.featured ? (
+                <div class="inline-block px-3 py-1 text-[0.65rem] font-display font-bold tracking-[0.15em] uppercase bg-red text-cream rounded-sm mb-4 w-fit">
+                  Most Popular
+                </div>
+              ) : (
+                <div class="h-[26px] mb-4"></div>
+              )}
+              {tier.icon === "graduation-cap" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red mb-3">
+                  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+                  <path d="M22 10v6"/>
+                  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+                </svg>
+              )}
+              {tier.icon === "workflow" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red mb-3">
+                  <rect width="8" height="8" x="3" y="3" rx="2"/>
+                  <path d="M7 11v4a2 2 0 0 0 2 2h4"/>
+                  <rect width="8" height="8" x="13" y="13" rx="2"/>
+                </svg>
+              )}
+              {tier.icon === "code-2" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red mb-3">
+                  <path d="m18 16 4-4-4-4"/>
+                  <path d="m6 8-4 4 4 4"/>
+                  <path d="m14.5 4-5 16"/>
+                </svg>
+              )}
               <div class="font-display text-[0.7rem] font-bold tracking-[0.2em] uppercase text-red mb-2">
                 {tier.name}
               </div>

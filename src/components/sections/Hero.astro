@@ -16,48 +16,148 @@
   </div>
 
   <div class="max-w-[1200px] mx-auto w-full relative">
-    <div
-      class="font-display text-[0.75rem] font-semibold tracking-[0.2em] uppercase text-red mb-8 flex items-center gap-4"
-    >
-      <span class="block w-8 h-px bg-red"></span>
-      AI Strategy & Transformation
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <!-- Left column: headline + CTA -->
+      <div>
+        <div
+          class="font-display text-[0.75rem] font-semibold tracking-[0.2em] uppercase text-red mb-8 flex items-center gap-4"
+        >
+          <span class="block w-8 h-px bg-red"></span>
+          AI Strategy & Transformation
+        </div>
+
+        <h1
+          class="font-display text-[clamp(2.8rem,6.5vw,5.5rem)] font-extrabold leading-[1.05] tracking-tight max-w-[640px] mb-8"
+        >
+          Your business doesn't need an AI vendor. It needs to <span class="text-red"
+            >become</span
+          > one.
+        </h1>
+
+        <p
+          class="font-serif text-[clamp(1.15rem,2vw,1.4rem)] leading-relaxed text-cream-muted max-w-[540px] mb-12"
+        >
+          The cost of building custom software has collapsed. What took a dev team
+          and six figures now takes weeks and costs almost nothing. Every business
+          you compete with will figure this out eventually. The ones that figure it
+          out first don't just get ahead — they rewrite the rules.
+        </p>
+
+        <a
+          href="#review"
+          class="inline-flex items-center gap-3 bg-red text-cream py-4 px-8 font-display font-bold text-[0.9rem] tracking-[0.06em] uppercase no-underline rounded-sm hover:bg-red-glow hover:shadow-[0_4px_40px_rgba(200,16,46,0.3)] hover:-translate-y-px transition-all duration-300 group"
+        >
+          Take the AI Possibilities Review
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2.5"
+            stroke="currentColor"
+            class="w-[18px] h-[18px] group-hover:translate-x-1 transition-transform duration-300"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Right column: AI terminal/dashboard visual -->
+      <div class="hidden md:block">
+        <div class="terminal-card bg-surface border border-cream/[0.06] rounded-sm overflow-hidden">
+          <!-- Terminal header -->
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-cream/[0.06] bg-surface-2/50">
+            <span class="w-[10px] h-[10px] rounded-full bg-[#C8102E]"></span>
+            <span class="w-[10px] h-[10px] rounded-full bg-[#E5A000]"></span>
+            <span class="w-[10px] h-[10px] rounded-full bg-[#2EA043]"></span>
+            <span class="ml-3 font-body text-[0.7rem] text-cream-dim tracking-wide">ai-agent.rs</span>
+          </div>
+
+          <!-- Terminal body -->
+          <div class="p-5 space-y-3 font-mono text-[0.8rem]">
+            <!-- Line 1: keyword + value -->
+            <div class="flex items-center gap-2">
+              <span class="text-red font-semibold">use</span>
+              <span class="text-cream-dim">sovereign::core::agent;</span>
+            </div>
+
+            <!-- Line 2: keyword + value -->
+            <div class="flex items-center gap-2">
+              <span class="text-red font-semibold">use</span>
+              <span class="text-cream-dim">sovereign::llm::pipeline;</span>
+            </div>
+
+            <!-- Blank line spacer -->
+            <div class="h-2"></div>
+
+            <!-- Line 3: function signature -->
+            <div class="flex items-center gap-2">
+              <span class="text-red font-semibold">fn</span>
+              <span class="text-cream/80">deploy_agent</span>
+              <span class="text-cream-dim">() -> Result&lt;()&gt; &#123;</span>
+            </div>
+
+            <!-- Code bars (simulated indented code) -->
+            <div class="pl-5 space-y-2">
+              <div class="h-[6px] rounded-full bg-red/20" style="width: 65%"></div>
+              <div class="h-[6px] rounded-full bg-cream/10" style="width: 45%"></div>
+              <div class="h-[6px] rounded-full bg-red/15" style="width: 55%"></div>
+              <div class="h-[6px] rounded-full bg-cream/10" style="width: 30%"></div>
+            </div>
+
+            <!-- Line: inline code -->
+            <div class="pl-5 flex items-center gap-2">
+              <span class="text-cream-dim">agent.</span><span class="text-red">optimize</span><span class="text-cream-dim">(config)?;</span>
+            </div>
+
+            <!-- More code bars -->
+            <div class="pl-5 space-y-2">
+              <div class="h-[6px] rounded-full bg-cream/10" style="width: 40%"></div>
+              <div class="h-[6px] rounded-full bg-red/20" style="width: 60%"></div>
+            </div>
+
+            <!-- Closing brace -->
+            <div class="text-cream-dim">&#125;</div>
+          </div>
+
+          <!-- Status bar -->
+          <div class="flex items-center gap-2 px-4 py-2.5 border-t border-cream/[0.06] bg-surface-2/30">
+            <span class="w-[7px] h-[7px] rounded-full bg-[#2EA043] status-pulse"></span>
+            <span class="font-body text-[0.7rem] text-cream-dim tracking-wide">Agent running...</span>
+            <span class="ml-auto font-body text-[0.65rem] text-cream-dim/50">v0.4.2</span>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <h1
-      class="font-display text-[clamp(2.8rem,6.5vw,5.5rem)] font-extrabold leading-[1.05] tracking-tight max-w-[900px] mb-8"
-    >
-      Your business doesn't need an AI vendor. It needs to <span class="text-red"
-        >become</span
-      > one.
-    </h1>
-
-    <p
-      class="font-serif text-[clamp(1.15rem,2vw,1.4rem)] leading-relaxed text-cream-muted max-w-[620px] mb-12"
-    >
-      The cost of building custom software has collapsed. What took a dev team
-      and six figures now takes weeks and costs almost nothing. Every business
-      you compete with will figure this out eventually. The ones that figure it
-      out first don't just get ahead — they rewrite the rules.
-    </p>
-
-    <a
-      href="#review"
-      class="inline-flex items-center gap-3 bg-red text-cream py-4 px-8 font-display font-bold text-[0.9rem] tracking-[0.06em] uppercase no-underline rounded-sm hover:bg-red-glow hover:shadow-[0_4px_40px_rgba(200,16,46,0.3)] hover:-translate-y-px transition-all duration-300 group"
-    >
-      Take the AI Possibilities Review
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="2.5"
-        stroke="currentColor"
-        class="w-[18px] h-[18px] group-hover:translate-x-1 transition-transform duration-300"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
-      </svg>
-    </a>
   </div>
 </section>
+
+<style>
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(200, 16, 46, 0.08), 0 0 60px rgba(200, 16, 46, 0.04);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(200, 16, 46, 0.14), 0 0 80px rgba(200, 16, 46, 0.07);
+    }
+  }
+
+  @keyframes status-blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  .terminal-card {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  .status-pulse {
+    animation: status-blink 2s ease-in-out infinite;
+  }
+</style>

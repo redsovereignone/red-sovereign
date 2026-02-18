@@ -1,0 +1,77 @@
+---
+
+---
+
+<section class="bg-surface border-y border-cream/[0.04] py-12 px-10 max-md:py-8 max-md:px-6">
+  <div class="max-w-[1200px] mx-auto">
+    <p
+      class="text-cream-dim text-[0.7rem] font-display font-semibold uppercase tracking-[0.2em] text-center mb-8"
+    >
+      Tools & Platforms We Work With
+    </p>
+
+    <div class="logo-scroll-mask overflow-hidden">
+      <div class="logo-scroll-track">
+        {
+          [
+            "Claude",
+            "Azure",
+            "HubSpot",
+            "Semrush",
+            "OpenAI",
+            "Slack",
+            "WordPress",
+            "Zapier",
+            "Claude",
+            "Azure",
+            "HubSpot",
+            "Semrush",
+            "OpenAI",
+            "Slack",
+            "WordPress",
+            "Zapier",
+          ].map((name) => (
+            <span class="font-display font-bold text-cream-dim/40 text-lg uppercase tracking-wider whitespace-nowrap px-10">
+              {name}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .logo-scroll-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+  }
+
+  .logo-scroll-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

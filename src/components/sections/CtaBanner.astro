@@ -1,0 +1,40 @@
+---
+import { site } from "@/data/site";
+---
+
+<section
+  class="py-24 px-10 max-md:py-16 max-md:px-6 bg-[linear-gradient(135deg,rgba(200,16,46,0.04)_0%,rgba(200,16,46,0.08)_50%,rgba(200,16,46,0.04)_100%)] border-y border-red/10"
+>
+  <div class="max-w-[1200px] mx-auto fade-in">
+    <h2
+      class="font-display text-[clamp(1.8rem,3.5vw,2.8rem)] font-extrabold text-center leading-[1.1] tracking-tight"
+    >
+      Ready to see what AI can do for your business?
+    </h2>
+
+    <p
+      class="font-serif text-cream-muted text-center text-[1.1rem] leading-relaxed max-w-[540px] mx-auto mt-4 mb-10"
+    >
+      Start with a conversation — no pitch, no pressure. Just a clear look at
+      what's possible.
+    </p>
+
+    <div class="flex items-center justify-center gap-4 max-md:flex-col">
+      <a
+        href={site.booking}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-3 bg-red text-cream py-4 px-8 font-display font-bold text-[0.9rem] tracking-[0.06em] uppercase no-underline rounded-sm hover:bg-red-glow hover:shadow-[0_4px_40px_rgba(200,16,46,0.3)] hover:-translate-y-px transition-all duration-300"
+      >
+        Book a Call
+      </a>
+
+      <a
+        href="#review"
+        class="inline-flex items-center gap-3 border border-cream/[0.12] text-cream py-4 px-8 font-display font-bold text-[0.9rem] tracking-[0.06em] uppercase no-underline rounded-sm hover:border-red/50 transition-all duration-300"
+      >
+        Take the Quiz
+      </a>
+    </div>
+  </div>
+</section>
