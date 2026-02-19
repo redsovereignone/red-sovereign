@@ -7,6 +7,7 @@ export const site = {
   email: "info@redsovereign.com",
   linkedin: "https://www.linkedin.com/in/nvossburg/",
   twitter: "https://x.com/redsovereign",
+  twitterHandle: "@redsovereign",
   booking: "https://app.reclaim.ai/m/redsovereign",
   ogImage: "/og-image.jpg",
   founder: {
@@ -16,6 +17,8 @@ export const site = {
 } as const;
 
 export const navLinks = [
-  { label: "Approach", href: "/#approach" },
-  { label: "Why Us", href: "/#difference" },
+  { label: "About", href: "/about/" },
+  { label: "Pricing", href: "/pricing/" },
+  { label: "FAQ", href: "/faq/" },
+  { label: "Blog", href: "/blog/" },
 ] as const;

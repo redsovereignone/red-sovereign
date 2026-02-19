@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && wrangler pages deploy dist"
+    "deploy": "astro build && wrangler pages deploy dist && node scripts/indexnow.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0",

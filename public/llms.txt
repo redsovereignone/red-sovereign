@@ -14,10 +14,10 @@ Red Sovereign helps businesses train their teams, automate operations, build cus
 ## Key Pages
 
 - [Home](https://redsovereign.com/)
-- [About](https://redsovereign.com/about)
-- [Pricing](https://redsovereign.com/pricing)
-- [FAQ](https://redsovereign.com/faq)
-- [Blog](https://redsovereign.com/blog)
+- [About](https://redsovereign.com/about/)
+- [Pricing](https://redsovereign.com/pricing/)
+- [FAQ](https://redsovereign.com/faq/)
+- [Blog](https://redsovereign.com/blog/)
 - [Full LLM Content](https://redsovereign.com/llms-full.txt)
 
 ## Contact

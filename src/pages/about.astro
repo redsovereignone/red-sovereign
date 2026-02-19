@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumbs from "@/components/astro/Breadcrumbs.astro";
+import JsonLd from "@/components/astro/JsonLd.astro";
+import { webPageSchema, personSchema } from "@/lib/schemas";
 import { site } from "@/data/site";
 ---
 
@@ -7,7 +10,34 @@ import { site } from "@/data/site";
   title="About"
   description="Meet the founder behind Red Sovereign. 25 years of building, scaling, and exiting companies, now helping businesses become AI-capable."
 >
-  <section class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
+  <Breadcrumbs items={[{ label: "About", href: "/about/" }]} />
+
+  <JsonLd
+    schema={webPageSchema({
+      name: "About Red Sovereign",
+      description:
+        "Meet the founder behind Red Sovereign. 25 years of building, scaling, and exiting companies, now helping businesses become AI-capable.",
+      url: `${site.url}/about/`,
+    })}
+  />
+  <JsonLd
+    schema={personSchema({
+      name: site.founder.name,
+      jobTitle: site.founder.title,
+      worksFor: site.name,
+      sameAs: [site.linkedin, site.twitter],
+      knowsAbout: [
+        "AI Strategy",
+        "Business Transformation",
+        "Operations Automation",
+        "AI-Powered Software Development",
+        "Go-to-Market Strategy",
+        "Cloud Services",
+      ],
+    })}
+  />
+
+  <section class="pt-12 pb-28 px-10 max-md:pt-8 max-md:pb-16 max-md:px-6">
     <div class="max-w-[800px] mx-auto">
       <div class="section-tag">About</div>
       <h1
@@ -17,25 +47,37 @@ import { site } from "@/data/site";
       </h1>
 
       <div class="font-serif text-[1.15rem] leading-relaxed text-cream-muted space-y-6">
+        <h2 class="font-display text-xl font-bold text-cream">
+          Who founded Red Sovereign?
+        </h2>
         <p>
           Red Sovereign was founded by <strong class="text-cream font-semibold"
             >{site.founder.name}</strong
           >, a three-time founder who has built, scaled, and exited companies across
-          hardware, cloud services, and enterprise go-to-market strategy.
+          hardware, cloud services, and enterprise go-to-market strategy. With 25 years
+          of operational experience, Nick recognized that AI represents the same kind of
+          fundamental shift he saw with cloud computing in 2010.
         </p>
+
+        <h2 class="font-display text-xl font-bold text-cream">
+          What does Red Sovereign do?
+        </h2>
         <p>
-          After 25 years of building businesses, Nick recognized the same
-          pattern he saw with cloud computing in 2010: a fundamental shift that
-          would rewrite the rules of every industry. AI-powered development has
-          collapsed the cost of building software to near zero, and the
-          businesses that figure this out first will have an insurmountable
-          advantage.
+          Red Sovereign helps businesses become genuinely AI-capable organizations. We
+          train teams, automate operations, build custom software, and transfer
+          permanent development capability — so businesses can build, automate, and ship
+          on their own without hiring developers or depending on vendors.
         </p>
+
+        <h2 class="font-display text-xl font-bold text-cream">
+          Why does Red Sovereign exist?
+        </h2>
         <p>
-          Red Sovereign exists to help businesses make that shift. Not by
-          selling AI tools or building dependency, but by making organizations
-          genuinely AI-capable, so they can build, automate, and ship on their
-          own.
+          AI-powered development has collapsed the cost of building software to near
+          zero, and the businesses that figure this out first will have an
+          insurmountable advantage. Red Sovereign exists to help businesses make
+          that shift — not by selling AI tools or building dependency, but by making
+          organizations genuinely self-sufficient.
         </p>
       </div>
 
@@ -64,6 +106,38 @@ import { site } from "@/data/site";
           class="inline-flex items-center gap-3 bg-red text-cream py-4 px-8 font-display font-bold text-[0.85rem] tracking-[0.06em] uppercase no-underline rounded-sm hover:bg-red-glow hover:shadow-[0_4px_40px_rgba(200,16,46,0.3)] transition-all duration-300"
         >
           Book a Conversation
+        </a>
+      </div>
+
+      <!-- Cross-links -->
+      <div class="mt-20 grid md:grid-cols-2 gap-6">
+        <a
+          href="/pricing/"
+          class="group block p-8 bg-surface border border-cream/[0.06] rounded-sm no-underline hover:border-red/30 transition-colors duration-300"
+        >
+          <div class="font-display text-[0.7rem] font-bold tracking-[0.15em] uppercase text-red mb-2">
+            Pricing
+          </div>
+          <div class="font-display font-bold text-cream group-hover:text-red transition-colors duration-300">
+            See our engagement tiers
+          </div>
+          <p class="text-cream-muted text-sm mt-1">
+            Transparent pricing from team training to full business transformation.
+          </p>
+        </a>
+        <a
+          href="/faq/"
+          class="group block p-8 bg-surface border border-cream/[0.06] rounded-sm no-underline hover:border-red/30 transition-colors duration-300"
+        >
+          <div class="font-display text-[0.7rem] font-bold tracking-[0.15em] uppercase text-red mb-2">
+            FAQ
+          </div>
+          <div class="font-display font-bold text-cream group-hover:text-red transition-colors duration-300">
+            Common questions answered
+          </div>
+          <p class="text-cream-muted text-sm mt-1">
+            How we work, who we work with, and what makes us different.
+          </p>
         </a>
       </div>
     </div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumbs from "@/components/astro/Breadcrumbs.astro";
 import JsonLd from "@/components/astro/JsonLd.astro";
 import { getCollection, render } from "astro:content";
 import { webPageSchema } from "@/lib/schemas";
@@ -22,6 +23,8 @@ for (const post of posts) {
   title="Blog"
   description="Explore insights on AI strategy, operations automation, and building AI-capable organizations. Practical guidance from Red Sovereign to help your business lead with AI."
 >
+  <Breadcrumbs items={[{ label: "Blog", href: "/blog/" }]} />
+
   <JsonLd
     schema={webPageSchema({
       name: "Red Sovereign Blog",
@@ -31,7 +34,7 @@ for (const post of posts) {
     })}
   />
 
-  <section class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
+  <section class="pt-12 pb-28 px-10 max-md:pt-8 max-md:pb-16 max-md:px-6">
     <div class="max-w-[800px] mx-auto">
       <div class="section-tag">Blog</div>
       <h1
@@ -45,7 +48,7 @@ for (const post of posts) {
           <div class="space-y-8">
             {posts.map((post) => (
               <a
-                href={`/blog/${post.id}/`}
+                href={`/blog/${post.id.replace(/\.mdx?$/, "")}/`}
                 class="block p-8 border border-cream/[0.06] rounded-sm bg-surface hover:border-red/30 transition-colors duration-300 no-underline"
               >
                 <div class="flex items-center gap-3 text-cream-dim text-[0.8rem] font-display tracking-[0.1em] uppercase">

@@ -1,13 +1,5 @@
 import { useState, useEffect } from "react";
-
-const navLinks = [
-  { label: "Approach", href: "/#approach" },
-  { label: "Why Us", href: "/#difference" },
-  { label: "About", href: "/about/" },
-  { label: "Pricing", href: "/pricing/" },
-  { label: "FAQ", href: "/faq/" },
-  { label: "Blog", href: "/blog/" },
-];
+import { navLinks, site } from "@/data/site";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,11 +68,13 @@ export default function MobileMenu() {
 
           {/* CTA Button */}
           <a
-            href="/#review"
+            href={site.booking}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={handleLinkClick}
             className="mt-4 bg-red text-cream px-8 py-3.5 rounded-sm font-display font-semibold text-sm tracking-[0.06em] hover:bg-red-glow hover:shadow-[0_0_30px_rgba(200,16,46,0.3)] transition-all duration-300 no-underline"
           >
-            AI Possibilities Review
+            Book a Call
           </a>
         </div>
       </div>

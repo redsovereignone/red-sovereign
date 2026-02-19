@@ -12,16 +12,17 @@ import { site } from "@/data/site";
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { slug: post.id.replace(/\.mdx?$/, "") },
     props: post,
   }));
 }
 
 const post = Astro.props;
+const slug = post.id.replace(/\.mdx?$/, "");
 const { Content, remarkPluginFrontmatter } = await render(post);
 const minutesRead = remarkPluginFrontmatter.minutesRead;
 const wordCount = remarkPluginFrontmatter.wordCount;
-const postUrl = `${site.url}/blog/${post.id}`;
+const postUrl = `${site.url}/blog/${slug}/`;
 const hasFaqs = post.data.faqs && post.data.faqs.length > 0;
 ---
 
@@ -46,8 +47,8 @@ const hasFaqs = post.data.faqs && post.data.faqs.length > 0;
   />
   <JsonLd
     schema={breadcrumbSchema([
-      { name: "Home", url: site.url },
-      { name: "Blog", url: `${site.url}/blog` },
+      { name: "Home", url: `${site.url}/` },
+      { name: "Blog", url: `${site.url}/blog/` },
       { name: post.data.title, url: postUrl },
     ])}
   />

@@ -116,6 +116,28 @@ export function blogPostSchema(opts: {
   };
 }
 
+export function personSchema(opts: {
+  name: string;
+  jobTitle: string;
+  worksFor: string;
+  sameAs?: string[];
+  knowsAbout?: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: opts.name,
+    jobTitle: opts.jobTitle,
+    worksFor: {
+      "@type": "Organization",
+      name: opts.worksFor,
+      url: site.url,
+    },
+    ...(opts.sameAs?.length && { sameAs: opts.sameAs }),
+    ...(opts.knowsAbout?.length && { knowsAbout: opts.knowsAbout }),
+  };
+}
+
 export function breadcrumbSchema(
   items: { name: string; url: string }[]
 ) {

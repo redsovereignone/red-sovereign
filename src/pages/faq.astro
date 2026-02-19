@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumbs from "@/components/astro/Breadcrumbs.astro";
 import JsonLd from "@/components/astro/JsonLd.astro";
 import { faqSchema } from "@/lib/schemas";
 import { site } from "@/data/site";
@@ -52,9 +53,10 @@ const faqs = [
   title="FAQ"
   description="Frequently asked questions about Red Sovereign's AI strategy, automation, and custom software services."
 >
+  <Breadcrumbs items={[{ label: "FAQ", href: "/faq/" }]} />
   <JsonLd schema={faqSchema(faqs)} />
 
-  <section class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
+  <section class="pt-12 pb-28 px-10 max-md:pt-8 max-md:pb-16 max-md:px-6">
     <div class="max-w-[800px] mx-auto">
       <div class="section-tag" style="justify-content: center;">FAQ</div>
       <h1
@@ -92,6 +94,38 @@ const faqs = [
           class="inline-flex items-center gap-3 bg-red text-cream py-4 px-8 font-display font-bold text-[0.85rem] tracking-[0.06em] uppercase no-underline rounded-sm hover:bg-red-glow hover:shadow-[0_4px_40px_rgba(200,16,46,0.3)] transition-all duration-300"
         >
           Book a Conversation
+        </a>
+      </div>
+
+      <!-- Cross-links -->
+      <div class="mt-20 grid md:grid-cols-2 gap-6">
+        <a
+          href="/pricing/"
+          class="group block p-8 bg-surface border border-cream/[0.06] rounded-sm no-underline hover:border-red/30 transition-colors duration-300"
+        >
+          <div class="font-display text-[0.7rem] font-bold tracking-[0.15em] uppercase text-red mb-2">
+            Pricing
+          </div>
+          <div class="font-display font-bold text-cream group-hover:text-red transition-colors duration-300">
+            See our engagement tiers
+          </div>
+          <p class="text-cream-muted text-sm mt-1">
+            Transparent pricing from team training to full business transformation.
+          </p>
+        </a>
+        <a
+          href="/about/"
+          class="group block p-8 bg-surface border border-cream/[0.06] rounded-sm no-underline hover:border-red/30 transition-colors duration-300"
+        >
+          <div class="font-display text-[0.7rem] font-bold tracking-[0.15em] uppercase text-red mb-2">
+            About
+          </div>
+          <div class="font-display font-bold text-cream group-hover:text-red transition-colors duration-300">
+            Meet the founder
+          </div>
+          <p class="text-cream-muted text-sm mt-1">
+            25 years building, scaling, and exiting companies.
+          </p>
         </a>
       </div>
     </div>

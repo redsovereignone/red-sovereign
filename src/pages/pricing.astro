@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumbs from "@/components/astro/Breadcrumbs.astro";
+import JsonLd from "@/components/astro/JsonLd.astro";
+import { webPageSchema, serviceSchema } from "@/lib/schemas";
 import { site } from "@/data/site";
 
 const tiers = [
@@ -50,22 +53,60 @@ const tiers = [
   title="Pricing"
   description="Transparent pricing for AI strategy, automation, and custom software development. From team training to full business transformation."
 >
-  <section class="pt-40 pb-28 px-10 max-md:pt-28 max-md:pb-16 max-md:px-6">
+  <Breadcrumbs items={[{ label: "Pricing", href: "/pricing/" }]} />
+
+  <JsonLd
+    schema={webPageSchema({
+      name: "Red Sovereign Pricing",
+      description:
+        "Transparent pricing for AI strategy, automation, and custom software development.",
+      url: `${site.url}/pricing/`,
+    })}
+  />
+  <JsonLd
+    schema={serviceSchema({
+      name: "Activate — AI Productivity Training",
+      description:
+        "2-week AI productivity training engagement that makes your team 2-3x more productive. Includes advanced AI workflow training, tool setup, and team-specific use case development. Starting at $5K.",
+    })}
+  />
+  <JsonLd
+    schema={serviceSchema({
+      name: "Automate — Operations Automation",
+      description:
+        "4-8 week operations automation engagement including full operations audit, AI agent development, and workflow automation with measurable ROI within 30 days. Starting at $10K.",
+    })}
+  />
+  <JsonLd
+    schema={serviceSchema({
+      name: "Build — Custom Software & AI Products",
+      description:
+        "8-12 week custom software development engagement including AI agent and product builds, team capability transfer, and governance frameworks. Starting at $25K.",
+    })}
+  />
+
+  <section class="pt-12 pb-28 px-10 max-md:pt-8 max-md:pb-16 max-md:px-6">
     <div class="max-w-[1200px] mx-auto">
       <div class="section-tag" style="justify-content: center;">Pricing</div>
+
       <h1
         class="font-display text-[clamp(2.4rem,5vw,4rem)] font-extrabold leading-[1.1] tracking-tight mb-6 text-center"
       >
         Invest in <span class="text-red">capability</span>, not dependency.
       </h1>
-      <p
-        class="font-serif text-[1.15rem] text-cream-muted leading-relaxed max-w-[620px] mx-auto text-center mb-16"
-      >
-        Every engagement is designed to make you self-sufficient. You own the
-        systems, the knowledge, and the capability when we're done.
-      </p>
 
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="max-w-[620px] mx-auto text-center mb-6">
+        <h2 class="font-display text-lg font-bold text-cream mb-2">
+          How much does Red Sovereign cost?
+        </h2>
+        <p class="font-serif text-[1.15rem] text-cream-muted leading-relaxed">
+          Every engagement is designed to make you self-sufficient. Pricing starts at
+          $5K for team training, $10K for operations automation, and $25K for custom
+          software. You own the systems, the knowledge, and the capability when we're done.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-16">
         {
           tiers.map((tier) => (
             <div
@@ -148,6 +189,38 @@ const tiers = [
           class="text-red hover:text-red-glow transition-colors">Let's talk.</a
         >
       </p>
+
+      <!-- Cross-links -->
+      <div class="mt-20 max-w-[800px] mx-auto grid md:grid-cols-2 gap-6">
+        <a
+          href="/about/"
+          class="group block p-8 bg-surface border border-cream/[0.06] rounded-sm no-underline hover:border-red/30 transition-colors duration-300"
+        >
+          <div class="font-display text-[0.7rem] font-bold tracking-[0.15em] uppercase text-red mb-2">
+            About
+          </div>
+          <div class="font-display font-bold text-cream group-hover:text-red transition-colors duration-300">
+            Meet the founder
+          </div>
+          <p class="text-cream-muted text-sm mt-1">
+            25 years building, scaling, and exiting companies.
+          </p>
+        </a>
+        <a
+          href="/faq/"
+          class="group block p-8 bg-surface border border-cream/[0.06] rounded-sm no-underline hover:border-red/30 transition-colors duration-300"
+        >
+          <div class="font-display text-[0.7rem] font-bold tracking-[0.15em] uppercase text-red mb-2">
+            FAQ
+          </div>
+          <div class="font-display font-bold text-cream group-hover:text-red transition-colors duration-300">
+            Common questions answered
+          </div>
+          <p class="text-cream-muted text-sm mt-1">
+            How we work, who we work with, and what to expect.
+          </p>
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

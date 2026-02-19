@@ -11,7 +11,29 @@ export default defineConfig({
   output: "static",
   trailingSlash: "always",
   adapter: cloudflare(),
-  integrations: [react(), sitemap(), mdx()],
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) =>
+        !page.includes("/privacy/") && !page.includes("/terms/"),
+      serialize(item) {
+        const url = item.url;
+        if (url === "https://redsovereign.com/") {
+          item.priority = 1.0;
+          item.changefreq = "weekly";
+        } else if (url.includes("/blog/")) {
+          item.priority = 0.8;
+          item.changefreq = "weekly";
+        } else {
+          item.priority = 0.7;
+          item.changefreq = "monthly";
+        }
+        item.lastmod = new Date().toISOString();
+        return item;
+      },
+    }),
+    mdx(),
+  ],
   markdown: {
     remarkPlugins: [remarkReadingTime],
   },
