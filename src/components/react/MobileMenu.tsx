@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 const navLinks = [
   { label: "Approach", href: "/#approach" },
   { label: "Why Us", href: "/#difference" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Blog", href: "/blog" },
+  { label: "About", href: "/about/" },
+  { label: "Pricing", href: "/pricing/" },
+  { label: "FAQ", href: "/faq/" },
+  { label: "Blog", href: "/blog/" },
 ];
 
 export default function MobileMenu() {
