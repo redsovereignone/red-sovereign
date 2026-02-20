@@ -1,4 +1,5 @@
 import type { APIContext } from "astro";
+import type { Runtime } from "@astrojs/cloudflare";
 
 export const prerender = false;
 
@@ -6,7 +7,7 @@ export async function POST(context: APIContext) {
   const origin = new URL(context.request.url).origin;
 
   try {
-    const body = await context.request.json();
+    const body = await context.request.json() as { email?: unknown };
     const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -19,9 +20,20 @@ export async function POST(context: APIContext) {
       });
     }
 
-    const { env } = context.locals.runtime as { env: { NEWSLETTER: KVNamespace } };
+    const { env } = (context.locals as Runtime<{ NEWSLETTER?: KVNamespace }>).runtime;
+    const kv = env.NEWSLETTER;
 
-    await env.NEWSLETTER.put(`subscriber:${email}`, JSON.stringify({
+    if (!kv) {
+      return new Response(JSON.stringify({ error: "Newsletter service unavailable" }), {
+        status: 503,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": origin,
+        },
+      });
+    }
+
+    await kv.put(`subscriber:${email}`, JSON.stringify({
       email,
       subscribedAt: new Date().toISOString(),
     }));

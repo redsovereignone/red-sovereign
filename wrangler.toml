@@ -1,7 +1,12 @@
 name = "red-sovereign"
+pages_build_output_dir = "./dist"
 compatibility_date = "2026-02-01"
 compatibility_flags = ["nodejs_compat"]
 
-[[kv_namespaces]]
-binding = "NEWSLETTER"
-id = "PLACEHOLDER_NEWSLETTER_KV_ID"
+# KV namespace for newsletter subscribers.
+# Bind NEWSLETTER in the Cloudflare Pages dashboard:
+#   Settings > Bindings > KV Namespace > NEWSLETTER
+# For local dev, uncomment with a real namespace ID:
+# [[kv_namespaces]]
+# binding = "NEWSLETTER"
+# id = "<your-kv-namespace-id>"
