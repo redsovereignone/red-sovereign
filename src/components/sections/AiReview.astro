@@ -256,11 +256,21 @@ const questions = [
       const div = document.createElement("div");
       div.className =
         "p-8 bg-surface-2 border-l-2 border-red mb-5 rounded-r-sm";
-      div.innerHTML = `
-        <h4 class="font-display font-bold text-base mb-2">${opp.title}</h4>
-        <p class="text-cream-muted text-[0.95rem] leading-relaxed">${opp.desc}</p>
-        <span class="inline-block mt-3 font-display text-[0.7rem] font-bold tracking-[0.15em] uppercase text-red">${opp.impact}</span>
-      `;
+
+      const title = document.createElement("h4");
+      title.className = "font-display font-bold text-base mb-2";
+      title.textContent = opp.title;
+
+      const description = document.createElement("p");
+      description.className = "text-cream-muted text-[0.95rem] leading-relaxed";
+      description.textContent = opp.desc;
+
+      const impact = document.createElement("span");
+      impact.className =
+        "inline-block mt-3 font-display text-[0.7rem] font-bold tracking-[0.15em] uppercase text-red";
+      impact.textContent = opp.impact;
+
+      div.append(title, description, impact);
       opps.appendChild(div);
     });
 
