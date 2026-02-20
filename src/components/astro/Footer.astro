@@ -20,19 +20,52 @@ const legalLinks = [
 
 <footer class="border-t border-red/20 py-20 px-10 max-md:py-12 max-md:px-6">
   <div class="max-w-[1200px] mx-auto">
-    <div class="grid md:grid-cols-4 gap-12 max-md:gap-8">
-      <!-- Column 1: Brand -->
-      <div>
+    <!-- Newsletter Signup -->
+    <div class="mb-14 max-md:mb-10">
+      <div class="max-w-[480px]">
         <a href="/">
           <img src="/logo.png" alt={site.name} class="h-7 w-auto" />
         </a>
-        <p class="text-cream-dim text-sm leading-relaxed mt-4 max-w-[250px]">
-          AI Strategy &amp; Transformation for businesses ready to lead, not
-          follow.
+        <p class="text-cream-dim text-sm leading-relaxed mt-4 mb-5">
+          AI insights for business leaders. Get strategy breakdowns, use cases,
+          and no-fluff guidance delivered to your inbox.
+        </p>
+        <form id="newsletter-form" class="flex gap-2 max-sm:flex-col">
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="you@company.com"
+            autocomplete="email"
+            class="flex-1 bg-surface-2 border border-cream/[0.08] rounded-sm px-4 py-3 text-sm text-cream placeholder:text-cream-dim/60 focus:outline-none focus:border-red/50 transition-colors duration-300"
+          />
+          <button
+            type="submit"
+            class="bg-red text-cream py-3 px-6 font-display font-bold text-[0.8rem] tracking-[0.06em] uppercase rounded-sm hover:bg-red-glow hover:shadow-[0_4px_40px_rgba(200,16,46,0.3)] hover:-translate-y-px transition-all duration-300 whitespace-nowrap"
+          >
+            Subscribe
+          </button>
+        </form>
+        <p
+          id="newsletter-success"
+          class="hidden text-sm mt-3 text-green-400"
+        >
+          You're in! Check your inbox to confirm.
+        </p>
+        <p
+          id="newsletter-error"
+          class="hidden text-sm mt-3 text-red-glow"
+        >
+          Something went wrong. Please try again.
+        </p>
+        <p class="text-cream-dim/40 text-xs mt-3">
+          No spam. Unsubscribe anytime.
         </p>
       </div>
+    </div>
 
-      <!-- Column 2: Quick Links -->
+    <div class="grid md:grid-cols-3 gap-12 max-md:gap-8">
+      <!-- Column 1: Quick Links -->
       <div>
         <h4
           class="text-cream-dim text-xs font-medium uppercase tracking-[0.1em] mb-4"
@@ -55,7 +88,7 @@ const legalLinks = [
         </ul>
       </div>
 
-      <!-- Column 3: Connect -->
+      <!-- Column 2: Connect -->
       <div>
         <h4
           class="text-cream-dim text-xs font-medium uppercase tracking-[0.1em] mb-4"
@@ -80,7 +113,7 @@ const legalLinks = [
         </ul>
       </div>
 
-      <!-- Column 4: Legal -->
+      <!-- Column 3: Legal -->
       <div>
         <h4
           class="text-cream-dim text-xs font-medium uppercase tracking-[0.1em] mb-4"
@@ -113,3 +146,39 @@ const legalLinks = [
     </p>
   </div>
 </footer>
+
+<script>
+  const form = document.getElementById("newsletter-form") as HTMLFormElement;
+  const success = document.getElementById("newsletter-success")!;
+  const error = document.getElementById("newsletter-error")!;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = new FormData(form).get("email") as string;
+    const button = form.querySelector("button")!;
+    const originalText = button.textContent;
+
+    button.textContent = "Sending…";
+    button.disabled = true;
+    success.classList.add("hidden");
+    error.classList.add("hidden");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
+      form.classList.add("hidden");
+      success.classList.remove("hidden");
+    } catch {
+      error.classList.remove("hidden");
+    } finally {
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+  });
+</script>
